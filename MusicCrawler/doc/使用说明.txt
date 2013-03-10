@@ -1,6 +1,0 @@
-1、安装MySQL数据库，增加%MySQL_HOME%\bin到系统环境变量。
-2、双击执行程序目录下的createDBandUSR.bat脚本，输入密码为root。
-3、双击执行程序目录下的createtables.bat脚本，输入密码为music。
-4、双击执行程序目录下的DeltaCrawler.exe。
-5、程序结束后，双击执行程序目录下的dumpdata.dat脚本，导出数据。
-6、保留程序目录下的data.sql文件。
