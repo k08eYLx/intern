@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Main-Class: app.GuiMain
+Class-Path: .
+ libs/log4j-api-2.0-beta3.jar
+ libs/log4j-core-2.0-beta3.jar
+ libs/mysql-connector-java-5.1.22-bin.jar
+ libs/commons-logging-1.1.1.jar
+ libs/httpclient-4.2.2.jar
+ libs/httpcore-4.2.2.jar
+ libs/json.jar
+ libs/jsoup-1.7.1-ext.jar
+ libs/mybatis-3.2.0-SNAPSHOT.jar

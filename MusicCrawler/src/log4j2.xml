@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="off" strict="true">
+	<properties>
+		<property name="filename">logs/app.log</property>
+		<property name="exceptionfile">logs/appex.log</property>
+		<property name="stdpattern">
+			<!-- %l 相当于 %class{36} %L %M 记录的是真正写log的位置 -->
+			<!-- [%-5level] %d{yyyy-MM-dd 'at' HH:mm:ss} [Thread: %t] %l - %msg%xEx%n -->
+			[%-5level] %d{yyyy-MM-dd 'at' HH:mm:ss} [Thread: %t] - %msg%xEx%n
+		</property>
+	</properties>
+	<filter type="ThresholdFilter" level="trace" />
+
+	<appenders>
+		<appender type="Console" name="STDOUT">
+			<layout type="PatternLayout" pattern="${stdpattern}" />
+			<ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY" />
+		</appender>
+		<appender type="File" name="FileLog" fileName="${filename}">
+			<layout type="PatternLayout">
+				<pattern>${stdpattern}</pattern>
+			</layout>
+		</appender>
+		<!-- 
+		<appender type="File" name="ExceptionLog" fileName="${exceptionfile}">
+			<layout type="PatternLayout">
+				<pattern>${stdpattern}</pattern>
+			</layout>
+		</appender>
+		 -->
+	</appenders>
+
+	<loggers>
+		<root level="trace">
+			<appender-ref ref="STDOUT" />
+		</root>
+
+		<logger name="app.MainEntry" level="trace" additivity="true">
+			<appender-ref ref="FileLog" />
+		</logger>
+		
+		<!-- 
+		<logger name="ExceptionLog" level="trace" additivity="true">
+			<appender-ref ref="ExceptionLog" />
+		</logger>
+		 -->
+	</loggers>
+</configuration>

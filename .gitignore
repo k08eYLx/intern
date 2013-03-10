@@ -1,0 +1,15 @@
+*/.gitignore
+
+*/.idea/
+*/data-dev/
+*/etc/
+*/out/
+*/target/
+*/web-app/WEB-INF/classes/
+
+*/.settings/
+*/bin/
+*/data/
+*/logs/
+*/.classpath
+*/.project

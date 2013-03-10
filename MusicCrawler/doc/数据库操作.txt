@@ -1,0 +1,28 @@
+执行sql脚本：
+    第一种方式：在未连接数据库的情况下，输入 mysql -h localhost -u root -p 123456  < d:\book.sql 回车即可；
+    第二种方式：在已连接数据库的情况下，此时命令提示符为mysql>，输入 source d:\book.sql  或者 \. d:\book.sql 回车即可。
+
+
+
+show create table table_name;
+alter table table_name drop foreign key fk_name;
+
+
+
+在命令行查看字符集编码：show variables like '%character%';
+
+A、为了在命令行下能正确查看中文，命令行下执行： 
+set character_set_results=gbk;
+
+B、若需要在windows命令行执行insert、update，则执行： 
+set character_set_client=gbk;
+
+A、B 两个命令重启数据库前有效，重启后就失效了。 
+
+
+
+INSERT IGNORE INTO
+
+
+
+alter table t add column col_name varchar(32) after any_col;
