@@ -15,6 +15,14 @@ public class MainEntry {
 	
 	private static final Logger LOGGER = LogManager.getLogger(MainEntry.class.getName());
 
+	private static void addShutdownHook() {
+		Runtime.getRuntime().addShutdownHook(new Thread() {  
+            public void run() {  
+                System.err.println("Shutdown Hook!");  
+            }  
+        });
+	}
+	
 	private static String calculateTime(long start, long finish) {
 		long total = (finish - start) / (1000 * 60);    // minutes
 		long hours = total / 60;
@@ -25,6 +33,9 @@ public class MainEntry {
 	// if part is false, ids should be Record.ILLEGAL_ID
 	public static void runWork(boolean part, int sId, int eId, int interval, String url) {
 		LOGGER.info("App started.");
+		
+		addShutdownHook();
+		
 		long start = System.currentTimeMillis();
 
 		SingersCollector.fetchDefaultImage();

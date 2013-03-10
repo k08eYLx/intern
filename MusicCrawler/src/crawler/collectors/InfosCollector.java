@@ -45,7 +45,7 @@ public abstract class InfosCollector {
 	protected static final String BAIDU_VERIFY = "您的访问出错了";
 	
 	protected static final int TIME_OUT = 5 * Constants.SECOND;
-	protected static int sleepMillis = 10;     // 控制访问速度
+	protected static int sleepMillis = 0;     // 控制访问速度
 
 	protected static boolean stop = false;    // 停止爬取的标记
 

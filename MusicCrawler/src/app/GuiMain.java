@@ -81,7 +81,7 @@ public class GuiMain extends JFrame {
 				  , "western-male", "western-female", "western-group"
 				  , "other" };
 
-	private int interval = 0;    // -1
+	private int interval = 1;    // -1
 
 	private boolean partial = false;
 	
@@ -220,11 +220,8 @@ public class GuiMain extends JFrame {
 		eId = StringUtils.toInt(idStr);
 		
 		/*String intervalStr = intervalText.getText();
-		String retryStr = retryText.getText();
 		interval = StringUtils.toInt(intervalStr);
-		retry = StringUtils.toInt(retryStr);
-		interval = (interval != -1) ? interval : INTERVAL;
-		retry = (retry != -1) ? retry : RETRY;*/
+		interval = (interval != -1) ? interval : INTERVAL;*/
 	}
 	
 	private void switchStatus() {
