@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="libs/log4j-api-2.0-beta3.jar"/>
+	<classpathentry kind="lib" path="libs/log4j-core-2.0-beta3.jar"/>
+	<classpathentry kind="lib" path="libs/mysql-connector-java-5.1.22-bin.jar"/>
+	<classpathentry kind="lib" path="libs/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="libs/httpclient-4.2.2.jar"/>
+	<classpathentry kind="lib" path="libs/httpcore-4.2.2.jar"/>
+	<classpathentry kind="lib" path="libs/json.jar"/>
+	<classpathentry kind="lib" path="libs/jsoup-1.7.1-ext.jar"/>
+	<classpathentry kind="lib" path="libs/mybatis-3.2.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="libs/h2-1.3.170.jar"/>
+	<classpathentry kind="lib" path="libs/ini4j-0.5.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
