@@ -12,3 +12,9 @@
 */data/
 */doc/
 */logs/
+
+*/*.sdf
+*/*.suo
+*/Debug/
+*/ipch/
+*/*/Debug/

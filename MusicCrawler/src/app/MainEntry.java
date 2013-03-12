@@ -33,7 +33,7 @@ public class MainEntry {
 	// if part is false, ids should be Record.ILLEGAL_ID
 	public static void runWork(boolean part, int sId, int eId, int interval, String url) {
 		LOGGER.info("App started.");
-		
+
 		addShutdownHook();
 		
 		long start = System.currentTimeMillis();
