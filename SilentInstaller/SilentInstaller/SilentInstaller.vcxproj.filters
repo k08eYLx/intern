@@ -51,6 +51,9 @@
     <ClInclude Include="VirtualDesktop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WindowFinder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SilentInstaller.cpp">
@@ -72,6 +75,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VirtualDesktop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowFinder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

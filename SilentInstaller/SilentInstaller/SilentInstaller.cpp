@@ -51,12 +51,7 @@ BOOL CSilentInstallerApp::InitInstance()
 
 	CWinApp::InitInstance();
 
-
 	AfxEnableControlContainer();
-
-	// Create the shell manager, in case the dialog contains
-	// any shell tree view or shell list view controls.
-	CShellManager *pShellManager = new CShellManager;
 
 	// Standard initialization
 	// If you are not using these features and wish to reduce the size
@@ -68,9 +63,11 @@ BOOL CSilentInstallerApp::InitInstance()
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
 	SilentInstallerDlg dlg;
-	m_pMainWnd = &dlg;
-	
-	INT_PTR nResponse = dlg.DoModal();
+	//m_pMainWnd = &dlg;
+	dlg.DoModal();
+
+	/*INT_PTR nResponse = dlg.DoModal();
+	// 无论DoModal返回什么，if-else都根本执行不到。WHY?
 	if (nResponse == IDOK)
 	{
 		// TODO: Place code here to handle when the dialog is
@@ -80,13 +77,7 @@ BOOL CSilentInstallerApp::InitInstance()
 	{
 		// TODO: Place code here to handle when the dialog is
 		//  dismissed with Cancel
-	}
-
-	// Delete the shell manager created above.
-	if (pShellManager != NULL)
-	{
-		delete pShellManager;
-	}
+	}*/
 
 	// Since the dialog has been closed, return FALSE so that we exit the
 	//  application, rather than start the application's message pump.

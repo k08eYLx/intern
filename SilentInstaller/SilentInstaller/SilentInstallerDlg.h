@@ -8,9 +8,6 @@
 
 // SilentInstallerDlg
 
-// Hot key id for ALT+X
-const int ALT_X = 1314;    // 任意，但要唯一，否则将发生热键冲突
-
 /**
  * In fact, this is a property sheet, not a dialog.
 **/
@@ -26,6 +23,8 @@ public:
 
 private:
 	VirtualDesktop *vDesktop;
+	const CString ALT_X;
+	int altX;    // Hot key id for ALT+X
 
 protected:
 	WelcomePage wPage;
@@ -36,10 +35,11 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 public:
-	afx_msg void OnHelp();
 	afx_msg LRESULT OnHotKey(WPARAM wParam, LPARAM lParam);		// 自定义热键消息函数
 	virtual BOOL OnInitDialog();
 	afx_msg void OnDestroy();
+	afx_msg void OnWizFinish();
+	afx_msg void OnCancel();
 };
 
 

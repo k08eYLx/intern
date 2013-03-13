@@ -24,7 +24,7 @@ private:
 	HDESK hOriginalInput;
 	
 	BOOL IsOriginalDesktopActive;	// 是否在原始桌面
-	BOOL IsInitialDesktop;			// 是否初始化桌面，防止灰色按钮克星造成不可估计的后果
+	BOOL IsInitialDesktop;			// 是否初始化桌面
 	
 public:
 	static VirtualDesktop *getVirtualDesktop();

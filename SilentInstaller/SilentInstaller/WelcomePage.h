@@ -1,4 +1,5 @@
 #pragma once
+#include "afxwin.h"
 
 
 // WelcomePage dialog
@@ -19,6 +20,11 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 
+private:
+	CEdit edit;
+
 public:
 	virtual BOOL OnSetActive();
+	afx_msg void OnBnClickedListWindowsButton();
+	afx_msg void OnBnClickedListChildWindowsButton();
 };

@@ -110,6 +110,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="VirtualDesktop.h" />
     <ClInclude Include="WelcomePage.h" />
+    <ClInclude Include="WindowFinder.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FinishPage.cpp" />
@@ -122,6 +123,7 @@
     </ClCompile>
     <ClCompile Include="VirtualDesktop.cpp" />
     <ClCompile Include="WelcomePage.cpp" />
+    <ClCompile Include="WindowFinder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SilentInstaller.rc" />
