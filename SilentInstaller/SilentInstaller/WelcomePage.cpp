@@ -7,6 +7,7 @@
 #include "afxdialogex.h"
 
 #include "WindowFinder.h"
+#include "SilentInstallerDlg.h"
 
 // WelcomePage dialog
 
@@ -53,6 +54,9 @@ void WelcomePage::OnBnClickedListWindowsButton()
 	edit.SetWindowText("");
 	WindowFinder wndFinder;
 	wndFinder.listWindows(&edit);
+
+	SilentInstallerDlg *pSiDlg = (SilentInstallerDlg *)GetParent();
+	pSiDlg->getVirtualDesktop()->listWindows(&edit);
 }
 
 
@@ -61,6 +65,6 @@ void WelcomePage::OnBnClickedListChildWindowsButton()
 	// TODO: Add your control notification handler code here
 	edit.SetWindowText("");
 	WindowFinder wndFinder;
-	HWND hWnd = wndFinder.find("百度云 安装");
+	HWND hWnd = wndFinder.find("百度云 安装");   // 百度云 安装
 	wndFinder.listChildWindows(hWnd, &edit);
 }

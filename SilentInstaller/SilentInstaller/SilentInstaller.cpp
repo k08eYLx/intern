@@ -39,6 +39,25 @@ CSilentInstallerApp theApp;
 
 BOOL CSilentInstallerApp::InitInstance()
 {
+	//* 创建互斥体，让程序只能打开一次
+	HANDLE hMutex = CreateMutex(NULL, TRUE, _T("SilentInstallerMutex"));
+	if (GetLastError() == ERROR_ALREADY_EXISTS) {
+		::CloseHandle(hMutex);
+		hMutex = NULL;
+		MessageBox(NULL, _T("安装程序正在运行中！"), _T("提示："), MB_ICONWARNING | MB_OK);
+		CString titles[3] = { "Welcome", "Setting", "Finish" };    // 安装程序三个页面的title
+		for (int i = 0; i < 3; ++i) {
+			HWND prevWnd = FindWindow(NULL, titles[i]);
+			if (prevWnd != NULL) {
+				::ShowWindow(prevWnd, SW_SHOWNORMAL);
+				::SetForegroundWindow(prevWnd);
+				break;
+			}
+		}
+		return FALSE;
+	}
+	if(hMutex) ::ReleaseMutex(hMutex);    //*/
+
 	// InitCommonControlsEx() is required on Windows XP if an application
 	// manifest specifies use of ComCtl32.dll version 6 or later to enable
 	// visual styles.  Otherwise, any window creation will fail.

@@ -29,10 +29,8 @@ bool WindowFinder::appendText(CEdit *pEdit, HWND hwnd)
 
 		/*if (title.CompareNoCase(_T("下一步(&N) >")) == 0) {
 			int id = pWnd->GetDlgCtrlID();
-			AfxMessageBox(title);
-			// PostMessage没起效果
-			::PostMessage(hwnd, WM_LBUTTONDOWN, MK_LBUTTON, 0);
-			::PostMessage(hwnd, WM_LBUTTONUP, MK_LBUTTON, 0);
+			::SendMessage(hwnd, WM_LBUTTONDOWN, 0, MAKELPARAM(250, 200));
+			::SendMessage(hwnd, WM_LBUTTONUP, 0, MAKELPARAM(250, 200));
 		}*/
 
 		if (!title.IsEmpty()) {
@@ -66,6 +64,17 @@ void WindowFinder::listWindows(CEdit *pEdit)
 {
 	EnumWindows((WNDENUMPROC)EnumWindowsProc, (LPARAM)pEdit); 
 }
+
+void WindowFinder::listWindows(HDESK hDesktop, CEdit *pEdit)
+{
+	if (hDesktop == NULL) {
+		listWindows(pEdit);
+	}
+	else {
+		EnumDesktopWindows(hDesktop, (WNDENUMPROC)EnumWindowsProc, (LPARAM)pEdit); 
+	}
+}
+
 
 BOOL CALLBACK EnumChildProc(HWND hWndChild, LPARAM lParam) 
 {

@@ -3,6 +3,11 @@
 
 // WindowFinder
 
+struct Wnd {
+	CString title;
+	HWND hWnd;
+};
+
 class WindowFinder : public CWnd
 {
 	DECLARE_DYNAMIC(WindowFinder)
@@ -13,6 +18,7 @@ public:
 
 public:
 	void listWindows(CEdit *pEdit);
+	void listWindows(HDESK hDesktop, CEdit *pEdit);
 	void listChildWindows(HWND hWndParent, CEdit *pEdit);
 	HWND find(CString name);
 	HWND findChild(CString name);

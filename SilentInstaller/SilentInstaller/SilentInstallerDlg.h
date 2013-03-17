@@ -22,14 +22,17 @@ public:
 	virtual ~SilentInstallerDlg();
 
 private:
-	VirtualDesktop *vDesktop;
+	VirtualDesktop *vDesktop;	
 	const CString ALT_X;
 	int altX;    // Hot key id for ALT+X
 
 protected:
 	WelcomePage wPage;
 	SettingPage sPage;
-	FinishPage fPage;
+	FinishPage  fPage;
+
+public:
+	VirtualDesktop *getVirtualDesktop();
 
 protected:
 	DECLARE_MESSAGE_MAP()

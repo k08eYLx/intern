@@ -14,8 +14,8 @@ IMPLEMENT_DYNAMIC(VirtualDesktop, CWnd)
 
 VirtualDesktop::VirtualDesktop()
 {
-	IsOriginalDesktopActive = TRUE;
-	IsInitialDesktop = TRUE;
+	isOriginalDesktopActive = TRUE;
+	isInitialDesktop = TRUE;
 }
 
 VirtualDesktop::~VirtualDesktop()
@@ -25,8 +25,7 @@ VirtualDesktop::~VirtualDesktop()
 
 VirtualDesktop *VirtualDesktop::getVirtualDesktop()
 {
-	if (vDesktop == NULL)
-	{
+	if (vDesktop == NULL) {
 		vDesktop = new VirtualDesktop();
 	}
 	return vDesktop;
@@ -34,52 +33,79 @@ VirtualDesktop *VirtualDesktop::getVirtualDesktop()
 
 void VirtualDesktop::create()
 {
-	if (IsInitialDesktop)	// 第一次运行时初始化程序
-	{
-		// 创建名称为“Virtual”的虚拟桌面（与CloseDesktop相对应）
-		hDesktop = CreateDesktop("Virtual", NULL, NULL, 0, GENERIC_ALL , NULL);	
+	if (isInitialDesktop) {	   // 第一次运行时初始化程序
+		// 创建名称为“siVirtualDesktop”的虚拟桌面（与CloseDesktop相对应）
+		CString desktopName = "siVirtualDesktop";
+		hDesktop = CreateDesktop(desktopName, NULL, NULL, 0, GENERIC_ALL , NULL);	
 
 		// 初始化创建进程必须的结构体
-		ZeroMemory(&StartupInfo, sizeof(StartupInfo));
-		ZeroMemory(&ProcessInfo, sizeof(ProcessInfo));
-		StartupInfo.cb        = sizeof(StartupInfo);
-		StartupInfo.lpDesktop = "Virtual";
+		ZeroMemory(&startupInfo, sizeof(startupInfo));
+		ZeroMemory(&processInfo, sizeof(processInfo));
+		startupInfo.cb         = sizeof(startupInfo);
+		startupInfo.lpDesktop  = desktopName.GetBuffer();
+		desktopName.ReleaseBuffer();
 
 		// 记录原始桌面的句柄
 		hOriginalThread = GetThreadDesktop(GetCurrentThreadId());   
 		hOriginalInput  = OpenInputDesktop(0, FALSE, DESKTOP_SWITCHDESKTOP); 
 
-		// 无法执行安装程序，但可以运行其他可执行程序。WHY???
-		// "D:\\eclipse-yanglx\\eclipse.exe"
-		CString commandLine = "explorer";
-		// 创建桌面外壳进程，在公司电脑上会出现dwProcessId不一致的情况，在自己电脑上没问题。
-		if (!::CreateProcess(NULL, (CT2A)commandLine, NULL, NULL, FALSE, 0, NULL, NULL, &StartupInfo, &ProcessInfo))
-		{
-			TRACE("===> Create process failed!\n");
-			exit(EXIT_FAILURE);
-		}
+		CString commandLine = "BaiduYun.exe";    // "explorer"
+		::CreateProcess(NULL, (CT2A)commandLine, NULL, NULL, TRUE
+			, NORMAL_PRIORITY_CLASS, NULL, NULL, &startupInfo, &processInfo);
 
 		// 完成初始化，以后不会再次被调用，防止打开虚拟桌面出现资源管理器
-		IsInitialDesktop = !IsInitialDesktop;
+		isInitialDesktop = !isInitialDesktop;
 	}
+}
+
+HWND VirtualDesktop::getHwndByPid(DWORD dwPid)
+{
+    HWND hWnd = ::GetTopWindow(NULL);
+	while (hWnd != NULL) {
+		/*
+		 * Retrieves the identifier of the thread that created the specified window and, 
+		 * optionally, the identifier of the process that created the window.
+		 */
+        DWORD pid = 0;
+        DWORD dwTid = GetWindowThreadProcessId(hWnd, &pid);
+
+        if (dwTid != 0) {
+            if (pid == dwPid/*input process id*/) {
+                // hWnd is the handle to the window
+                return hWnd;
+            }
+        }
+
+        hWnd = ::GetNextWindow(hWnd , GW_HWNDNEXT);
+    }
+
+    return NULL;
+}
+
+BOOL VirtualDesktop::terminateProcess()
+{
+	// 获取虚拟桌面上的进程句柄
+	HANDLE hProcess = ::OpenProcess(PROCESS_ALL_ACCESS, FALSE, processInfo.dwProcessId);
+	if (hProcess) {
+		TRACE("%d", processInfo.dwProcessId);
+		::TerminateProcess(hProcess, EXIT_SUCCESS);	   // 结束虚拟桌面上的进程
+	}
+	return ::CloseHandle(hProcess);
+}
+
+void VirtualDesktop::deleteDesktop()
+{
+	::CloseDesktop(hDesktop);
+	delete vDesktop;
+	vDesktop = NULL;
 }
 
 void VirtualDesktop::destroy()
 {
-	// 关闭由本程序创建的explorer
-	if (vDesktop != NULL)
-	{
-		// 获取虚拟桌面的explorer进程句柄
-		HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, ProcessInfo.dwProcessId);
-		// HANDLE和ID怎么都变化了？？？
-		TRACE("ProcessId ===> %d %d %d\n", ProcessInfo.dwProcessId, hProcess, ProcessInfo.hProcess);
-		if (hProcess)   
-		{
-			TerminateProcess(hProcess, EXIT_SUCCESS);	// 结束虚拟桌面的explorer
-			CloseDesktop(hDesktop);
-		}
-		CloseHandle(hProcess);
-		delete vDesktop;
+	// 关闭由本程序创建的在虚拟桌面上运行的进程
+	if (vDesktop != NULL) {
+		terminateProcess();
+		deleteDesktop();
 	}
 }
 
@@ -89,19 +115,23 @@ void VirtualDesktop::destroy()
  */
 void VirtualDesktop::switchDesktop()
 {
-	if (IsOriginalDesktopActive)	   // 是否在原始桌面
-	{
+	if (isOriginalDesktopActive) {	   // 是否在原始桌面
 		//hDesktop = CreateDesktop("Virtual", NULL, NULL, 0, GENERIC_ALL , NULL);	// 创建虚拟桌面
 		SetThreadDesktop(hDesktop);    // 设置桌面活动焦点是虚拟桌面 
 		SwitchDesktop(hDesktop);       // 切换到虚拟桌面
 	} 
-	else
-	{
+	else {
 		SetThreadDesktop(hOriginalThread); // 设置桌面活动焦点是原始桌面 
 		SwitchDesktop(hOriginalInput);     // 切换回原始桌面
 		//CloseDesktop(hDesktop);	       // 关闭虚拟桌面
 	}
-	IsOriginalDesktopActive = !IsOriginalDesktopActive;
+	isOriginalDesktopActive = !isOriginalDesktopActive;
+}
+
+
+void VirtualDesktop::listWindows(CEdit *pEdit)
+{
+	wndFinder.listWindows(hDesktop, pEdit);
 }
 
 

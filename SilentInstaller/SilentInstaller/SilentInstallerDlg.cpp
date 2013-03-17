@@ -75,6 +75,12 @@ BOOL SilentInstallerDlg::OnInitDialog()
 }
 
 
+VirtualDesktop *SilentInstallerDlg::getVirtualDesktop()
+{
+	return vDesktop;
+}
+
+
 BEGIN_MESSAGE_MAP(SilentInstallerDlg, CPropertySheet)
 	ON_MESSAGE(WM_HOTKEY, OnHotKey)	   // 链接热键消息
 	ON_WM_DESTROY()
@@ -89,8 +95,7 @@ END_MESSAGE_MAP()
 LRESULT SilentInstallerDlg::OnHotKey(WPARAM wParam, LPARAM lParam)
 {
 	// TODO: Add your message handler code here and/or call default
-	if (wParam == altX)		// 消息为 Alt+X 时
-	{
+	if (wParam == altX)	{    // 消息为 Alt+X 时
 		vDesktop->switchDesktop();
 	}
 	return TRUE;
@@ -121,8 +126,7 @@ void SilentInstallerDlg::OnWizFinish()
 {
 	// TODO: Add your command handler code here
 
-
-	::PostMessage(m_hWnd, WM_DESTROY, 0, 0);
+	::SendMessage(m_hWnd, WM_DESTROY, 0, 0);
 	exit(EXIT_SUCCESS);
 }
 
@@ -131,7 +135,6 @@ void SilentInstallerDlg::OnCancel()
 {
 	// TODO: Add your command handler code here
 
-
-	::PostMessage(m_hWnd, WM_DESTROY, 0, 0);
+	::SendMessage(m_hWnd, WM_DESTROY, 0, 0);
 	exit(EXIT_SUCCESS);
 }
