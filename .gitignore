@@ -18,4 +18,5 @@
 */Debug/
 */ipch/
 */*/Debug/
-*/_ReSharper.SilentInstaller/
+*/*.ReSharper.user
+*/_ReSharper.*/
