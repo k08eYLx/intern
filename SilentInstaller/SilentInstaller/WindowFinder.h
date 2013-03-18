@@ -3,9 +3,11 @@
 
 // WindowFinder
 
-struct Wnd {
-	CString title;
-	HWND hWnd;
+struct WndInfo {
+	HANDLE  hEvent;
+	HDESK   hDesktop;
+	string  title;
+	HWND    hWnd;
 };
 
 class WindowFinder : public CWnd
@@ -23,6 +25,9 @@ public:
 	HWND find(CString name);
 	HWND findChild(CString name);
 	static bool appendText(CEdit *pEdit, HWND hwnd);
+
+	friend BOOL CALLBACK EnumWindowsProc(HWND hwnd, DWORD lParam);
+	friend BOOL CALLBACK EnumChildProc(HWND hWndChild, LPARAM lParam);
 
 protected:
 	DECLARE_MESSAGE_MAP()

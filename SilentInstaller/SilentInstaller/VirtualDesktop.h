@@ -16,7 +16,7 @@ public:
 	virtual ~VirtualDesktop();
 
 private:
-	static VirtualDesktop *vDesktop;
+	static VirtualDesktop *vDesktop;    // the only VD
 	
 	PROCESS_INFORMATION processInfo;
 	STARTUPINFO startupInfo;
@@ -42,6 +42,9 @@ public:
 	void switchDesktop();
 
 	void listWindows(CEdit *pEdit);
+	HWND findWindow(string title);    // Find window on VD
+
+	friend DWORD WINAPI tpFindWindow(LPVOID pParam);    // Thread procedure for find window
 
 protected:
 	DECLARE_MESSAGE_MAP()

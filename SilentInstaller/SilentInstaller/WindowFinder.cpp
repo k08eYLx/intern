@@ -26,13 +26,6 @@ bool WindowFinder::appendText(CEdit *pEdit, HWND hwnd)
 	if (pWnd != NULL) {
 		CString title;
 		pWnd->GetWindowText(title);
-
-		/*if (title.CompareNoCase(_T("ÏÂÒ»²½(&N) >")) == 0) {
-			int id = pWnd->GetDlgCtrlID();
-			::SendMessage(hwnd, WM_LBUTTONDOWN, 0, MAKELPARAM(250, 200));
-			::SendMessage(hwnd, WM_LBUTTONUP, 0, MAKELPARAM(250, 200));
-		}*/
-
 		if (!title.IsEmpty()) {
 			title.Append("\n");
 			int nLength = pEdit->SendMessage(WM_GETTEXTLENGTH);
@@ -44,7 +37,7 @@ bool WindowFinder::appendText(CEdit *pEdit, HWND hwnd)
 	return false;
 }
 
-BOOL CALLBACK EnumWindowsProc(HWND hwnd, DWORD lParam) 
+BOOL CALLBACK EnumWindowsProc(HWND hwnd, DWORD lParam)
 {
 	CEdit *pEdit = (CEdit *)lParam;
 	if (pEdit == NULL) return FALSE;
@@ -76,7 +69,7 @@ void WindowFinder::listWindows(HDESK hDesktop, CEdit *pEdit)
 }
 
 
-BOOL CALLBACK EnumChildProc(HWND hWndChild, LPARAM lParam) 
+BOOL CALLBACK EnumChildProc(HWND hWndChild, LPARAM lParam)
 {
 	CEdit *pEdit = (CEdit *)lParam;
 	if (pEdit == NULL) return FALSE;

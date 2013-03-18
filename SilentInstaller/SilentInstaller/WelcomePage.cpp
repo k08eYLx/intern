@@ -57,6 +57,13 @@ void WelcomePage::OnBnClickedListWindowsButton()
 
 	SilentInstallerDlg *pSiDlg = (SilentInstallerDlg *)GetParent();
 	pSiDlg->getVirtualDesktop()->listWindows(&edit);
+	HWND hWnd = pSiDlg->getVirtualDesktop()->findWindow("百度云 安装");
+	if (hWnd != NULL) {
+		// Son of a bitch, I made it!
+		::SendMessage(hWnd, WM_LBUTTONDOWN, MK_LBUTTON, MAKELONG(495, 2));
+		::SendMessage(hWnd, WM_LBUTTONUP, MK_LBUTTON, MAKELONG(495, 2));
+		AfxMessageBox("Find");
+	}
 }
 
 

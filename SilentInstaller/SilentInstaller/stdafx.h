@@ -39,6 +39,10 @@
 #include <afxdlgs.h>
 
 
+#include <string>
+using namespace std;
+
+
 
 // Aero
 //#ifdef _UNICODE

@@ -42,7 +42,7 @@ void VirtualDesktop::create()
 		ZeroMemory(&startupInfo, sizeof(startupInfo));
 		ZeroMemory(&processInfo, sizeof(processInfo));
 		startupInfo.cb         = sizeof(startupInfo);
-		startupInfo.lpDesktop  = desktopName.GetBuffer();
+		startupInfo.lpDesktop  = desktopName.GetBuffer();    // 默认桌面叫"Default"
 		desktopName.ReleaseBuffer();
 
 		// 记录原始桌面的句柄
@@ -132,6 +132,40 @@ void VirtualDesktop::switchDesktop()
 void VirtualDesktop::listWindows(CEdit *pEdit)
 {
 	wndFinder.listWindows(hDesktop, pEdit);
+}
+
+
+DWORD WINAPI tpFindWindow(LPVOID pParam)
+{
+	WndInfo *pWndInfo = (WndInfo *)pParam;
+	if (pWndInfo == NULL || pWndInfo->hEvent == NULL) return 1;
+	::SetThreadDesktop(pWndInfo->hDesktop);
+	pWndInfo->hWnd = ::FindWindow(NULL, (pWndInfo->title).c_str());
+	::SetEvent(pWndInfo->hEvent);
+	return 0;
+}
+
+/*
+ * 新创建一个线程，
+ * 在线程内执行SetThreadDesktop关联到指定桌面，
+ * 然后针对此桌面使用FindWindow。
+ */
+HWND VirtualDesktop::findWindow(string title)
+{
+	HANDLE hEvent = ::CreateEvent(NULL, FALSE, FALSE, "SyncEvent");
+	WndInfo *pWndInfo = new WndInfo();
+	ZeroMemory(pWndInfo, sizeof(WndInfo));
+	pWndInfo->hEvent = hEvent;
+	pWndInfo->hDesktop = hDesktop;
+	pWndInfo->title = title;
+	HANDLE hThread = CreateThread(NULL, 0,
+		tpFindWindow, (LPVOID)pWndInfo, 0, NULL);
+	WaitForSingleObject(hEvent, INFINITE);
+	CloseHandle(hEvent);
+	CloseHandle(hThread);
+	HWND hWnd = pWndInfo->hWnd;
+	if (pWndInfo != NULL) delete pWndInfo;
+	return hWnd;
 }
 
 
