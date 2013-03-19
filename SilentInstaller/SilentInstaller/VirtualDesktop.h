@@ -42,9 +42,12 @@ public:
 	void switchDesktop();
 
 	void listWindows(CEdit *pEdit);
-	HWND findWindow(string title);    // Find window on VD
 
+	HWND findWindow(string title);                      // Find window on VD
 	friend DWORD WINAPI tpFindWindow(LPVOID pParam);    // Thread procedure for find window
+
+	HWND fromPoint(POINT pt);                           // Find window by POINT on VD
+	friend DWORD WINAPI tpFromPoint(LPVOID pParam);     // Thread procedure for find window by POINT
 
 protected:
 	DECLARE_MESSAGE_MAP()

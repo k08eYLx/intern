@@ -56,13 +56,28 @@ void WelcomePage::OnBnClickedListWindowsButton()
 	wndFinder.listWindows(&edit);
 
 	SilentInstallerDlg *pSiDlg = (SilentInstallerDlg *)GetParent();
-	pSiDlg->getVirtualDesktop()->listWindows(&edit);
-	HWND hWnd = pSiDlg->getVirtualDesktop()->findWindow("百度云 安装");
+	VirtualDesktop *vDesktop = pSiDlg->getVirtualDesktop();
+	vDesktop->listWindows(&edit);
+	HWND hWnd = vDesktop->findWindow("百度云 安装");
 	if (hWnd != NULL) {
 		// Son of a bitch, I made it!
-		::SendMessage(hWnd, WM_LBUTTONDOWN, MK_LBUTTON, MAKELONG(495, 2));
-		::SendMessage(hWnd, WM_LBUTTONUP, MK_LBUTTON, MAKELONG(495, 2));
-		AfxMessageBox("Find");
+		Sleep(300);
+		// 自定义安装按钮
+		::SendMessage(hWnd, WM_LBUTTONDOWN, MK_LBUTTON, MAKELONG(250, 290));
+		::SendMessage(hWnd, WM_LBUTTONUP, MK_LBUTTON, MAKELONG(250, 290));
+		/*Sleep(300);
+		// 安装按钮
+		::SendMessage(hWnd, WM_LBUTTONDOWN, MK_LBUTTON, MAKELONG(450, 350));
+		::SendMessage(hWnd, WM_LBUTTONUP, MK_LBUTTON, MAKELONG(450, 350));
+		Sleep(10000);
+		// 完成按钮
+		::SendMessage(hWnd, WM_LBUTTONDOWN, MK_LBUTTON, MAKELONG(450, 350));
+		::SendMessage(hWnd, WM_LBUTTONUP, MK_LBUTTON, MAKELONG(450, 350));*/
+		Sleep(300);
+		POINT pt;
+		pt.x = 600;
+		pt.y = 340;
+		vDesktop->fromPoint(pt);
 	}
 }
 
@@ -73,5 +88,9 @@ void WelcomePage::OnBnClickedListChildWindowsButton()
 	edit.SetWindowText("");
 	WindowFinder wndFinder;
 	HWND hWnd = wndFinder.find("百度云 安装");   // 百度云 安装
+	wndFinder.listChildWindows(hWnd, &edit);
+	SilentInstallerDlg *pSiDlg = (SilentInstallerDlg *)GetParent();
+	pSiDlg->getVirtualDesktop()->listWindows(&edit);
+	hWnd = pSiDlg->getVirtualDesktop()->findWindow("百度云 安装");
 	wndFinder.listChildWindows(hWnd, &edit);
 }

@@ -118,7 +118,19 @@ void VirtualDesktop::switchDesktop()
 	if (isOriginalDesktopActive) {	   // 是否在原始桌面
 		//hDesktop = CreateDesktop("Virtual", NULL, NULL, 0, GENERIC_ALL , NULL);	// 创建虚拟桌面
 		SetThreadDesktop(hDesktop);    // 设置桌面活动焦点是虚拟桌面 
-		SwitchDesktop(hDesktop);       // 切换到虚拟桌面
+		SwitchDesktop(hDesktop);       // 
+		/*HWND hWnd = findWindow("百度云 安装");
+		Sleep(300);
+		::SendMessage(hWnd, WM_LBUTTONDOWN, MK_LBUTTON, MAKELONG(250, 290));
+		::SendMessage(hWnd, WM_LBUTTONUP, MK_LBUTTON, MAKELONG(250, 290));
+		Sleep(300);
+		POINT pt;
+		pt.x = 600;
+		pt.y = 340;
+		hWnd = fromPoint(pt);
+		char title[MAX_PATH] = { 0 };
+		::GetWindowText(hWnd, title, MAX_PATH - 1);
+		TRACE("%s\n", title);*/
 	} 
 	else {
 		SetThreadDesktop(hOriginalThread); // 设置桌面活动焦点是原始桌面 
@@ -160,6 +172,48 @@ HWND VirtualDesktop::findWindow(string title)
 	pWndInfo->title = title;
 	HANDLE hThread = CreateThread(NULL, 0,
 		tpFindWindow, (LPVOID)pWndInfo, 0, NULL);
+	WaitForSingleObject(hEvent, INFINITE);
+	CloseHandle(hEvent);
+	CloseHandle(hThread);
+	HWND hWnd = pWndInfo->hWnd;
+	if (pWndInfo != NULL) delete pWndInfo;
+	return hWnd;
+}
+
+
+DWORD WINAPI tpFromPoint(LPVOID pParam)
+{
+	WndInfo *pWndInfo = (WndInfo *)pParam;
+	if (pWndInfo == NULL || pWndInfo->hEvent == NULL) return 1;
+	::SetThreadDesktop(pWndInfo->hDesktop);
+	//pWndInfo->hWnd = ::WindowFromPoint(pWndInfo->pt);
+	pWndInfo->hWnd = ::WindowFromPoint(pWndInfo->pt);
+	char classname[MAX_PATH] = { 0 };
+	::GetClassName(pWndInfo->hWnd, classname, sizeof(classname) - 1);
+	TRACE("%d, %d ===> %s\n", pWndInfo->pt.x, pWndInfo->pt.y, classname);
+	CWnd *pWnd = CWnd::FromHandle(pWndInfo->hWnd);
+	CString title;
+	pWnd->GetWindowText(title);
+	TRACE("===> " + title + "\n");
+	::SetEvent(pWndInfo->hEvent);
+	return 0;
+}
+
+/*
+ * 新创建一个线程，
+ * 在线程内执行SetThreadDesktop关联到指定桌面，
+ * 然后针对此桌面使用FindWindow。
+ */
+HWND VirtualDesktop::fromPoint(POINT pt)
+{
+	HANDLE hEvent = ::CreateEvent(NULL, FALSE, FALSE, "SyncEvent");
+	WndInfo *pWndInfo = new WndInfo();
+	ZeroMemory(pWndInfo, sizeof(WndInfo));
+	pWndInfo->hEvent = hEvent;
+	pWndInfo->hDesktop = hDesktop;
+	pWndInfo->pt = pt;
+	HANDLE hThread = CreateThread(NULL, 0,
+		tpFromPoint, (LPVOID)pWndInfo, 0, NULL);
 	WaitForSingleObject(hEvent, INFINITE);
 	CloseHandle(hEvent);
 	CloseHandle(hThread);

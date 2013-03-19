@@ -7,6 +7,7 @@ struct WndInfo {
 	HANDLE  hEvent;
 	HDESK   hDesktop;
 	string  title;
+	POINT   pt;
 	HWND    hWnd;
 };
 
