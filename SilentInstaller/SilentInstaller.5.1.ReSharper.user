@@ -11,46 +11,46 @@
       <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SilentInstaller.rc" caret="2495" fromTop="13" />
       <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SilentInstaller.cpp" caret="2968" fromTop="14" />
       <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.h" caret="251" fromTop="2" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:stdafx.h" caret="1132" fromTop="12" />
       <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SilentInstallerDlg.h" caret="778" fromTop="16" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1433" fromTop="15" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="1402" fromTop="13" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.h" caret="770" fromTop="21" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.h" caret="156" fromTop="12" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="1262" fromTop="4" />
       <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SilentInstallerDlg.cpp" caret="1399" fromTop="11" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.h" caret="857" fromTop="33" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:stdafx.h" caret="1177" fromTop="7" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.h" caret="71" fromTop="2" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="439" fromTop="5" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="2083" fromTop="10" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="3573" fromTop="9" />
     </RecentFiles>
     <RecentEdits>
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.h" caret="325" fromTop="4" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="445" fromTop="6" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1597" fromTop="14" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="1250" fromTop="9" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="2347" fromTop="5" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="447" fromTop="6" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="667" fromTop="10" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1070" fromTop="10" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="211" fromTop="8" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SilentInstallerDlg.h" caret="558" fromTop="10" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.h" caret="375" fromTop="12" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1070" fromTop="1" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.h" caret="251" fromTop="2" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SilentInstallerDlg.cpp" caret="104" fromTop="3" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="3279" fromTop="7" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SilentInstallerDlg.h" caret="778" fromTop="16" />
       <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SilentInstallerDlg.cpp" caret="2137" fromTop="14" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="3279" fromTop="12" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="3279" fromTop="1" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.h" caret="291" fromTop="8" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="1546" fromTop="17" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.h" caret="479" fromTop="5" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="3298" fromTop="12" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="3298" fromTop="1" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.h" caret="336" fromTop="8" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.h" caret="497" fromTop="5" />
       <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.h" caret="18" fromTop="2" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="3349" fromTop="8" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="1462" fromTop="13" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1270" fromTop="9" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.h" caret="770" fromTop="3" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="973" fromTop="6" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.h" caret="79" fromTop="6" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="1331" fromTop="8" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="1231" fromTop="13" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="1100" fromTop="8" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="1043" fromTop="12" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="4347" fromTop="16" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="1377" fromTop="8" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="789" fromTop="10" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="674" fromTop="6" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.h" caret="527" fromTop="13" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.h" caret="276" fromTop="2" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:stdafx.h" caret="1177" fromTop="7" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.h" caret="95" fromTop="7" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.h" caret="869" fromTop="6" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="4022" fromTop="8" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="4256" fromTop="13" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="4012" fromTop="15" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.h" caret="111" fromTop="5" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="3549" fromTop="7" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="439" fromTop="5" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1509" fromTop="6" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="3774" fromTop="8" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1507" fromTop="6" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="5336" fromTop="12" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="3069" fromTop="3" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="3454" fromTop="5" />
     </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>

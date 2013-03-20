@@ -25,14 +25,13 @@ private:
 	HDESK hOriginalThread;
 	HDESK hOriginalInput;
 	
-	BOOL isOriginalDesktopActive;	// 是否在原始桌面
-	BOOL isInitialDesktop;			// 是否初始化桌面
+	BOOL isOriginalDesktopActive;  // 是否在原始桌面
+	BOOL isInitialDesktop;	       // 是否初始化桌面
 	
 	WindowFinder wndFinder;
 
 private:
-	HWND getHwndByPid(DWORD dwPid);
-	BOOL terminateProcess();  // 在虚拟桌面上创建的进程
+	BOOL terminateProcess();       // 在虚拟桌面上创建的进程
 	void deleteDesktop();
 
 public:

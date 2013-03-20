@@ -47,7 +47,10 @@ void VirtualDesktop::create()
 
 		// 记录原始桌面的句柄
 		hOriginalThread = GetThreadDesktop(GetCurrentThreadId());   
-		hOriginalInput  = OpenInputDesktop(0, FALSE, DESKTOP_SWITCHDESKTOP); 
+		hOriginalInput  = OpenInputDesktop(0, FALSE, DESKTOP_SWITCHDESKTOP);
+
+		/*::CreateProcess(NULL, "C:\\Windows\\explorer.exe", NULL, NULL, TRUE
+			, NORMAL_PRIORITY_CLASS, NULL, NULL, &startupInfo, &processInfo);*/
 
 		CString commandLine = "BaiduYun.exe";    // "explorer"
 		::CreateProcess(NULL, (CT2A)commandLine, NULL, NULL, TRUE
@@ -58,36 +61,13 @@ void VirtualDesktop::create()
 	}
 }
 
-HWND VirtualDesktop::getHwndByPid(DWORD dwPid)
-{
-    HWND hWnd = ::GetTopWindow(NULL);
-	while (hWnd != NULL) {
-		/*
-		 * Retrieves the identifier of the thread that created the specified window and, 
-		 * optionally, the identifier of the process that created the window.
-		 */
-        DWORD pid = 0;
-        DWORD dwTid = GetWindowThreadProcessId(hWnd, &pid);
-
-        if (dwTid != 0) {
-            if (pid == dwPid/*input process id*/) {
-                // hWnd is the handle to the window
-                return hWnd;
-            }
-        }
-
-        hWnd = ::GetNextWindow(hWnd , GW_HWNDNEXT);
-    }
-
-    return NULL;
-}
 
 BOOL VirtualDesktop::terminateProcess()
 {
 	// 获取虚拟桌面上的进程句柄
 	HANDLE hProcess = ::OpenProcess(PROCESS_ALL_ACCESS, FALSE, processInfo.dwProcessId);
 	if (hProcess) {
-		TRACE("%d", processInfo.dwProcessId);
+		TRACE("%d\n", processInfo.dwProcessId);
 		::TerminateProcess(hProcess, EXIT_SUCCESS);	   // 结束虚拟桌面上的进程
 	}
 	return ::CloseHandle(hProcess);
@@ -118,19 +98,7 @@ void VirtualDesktop::switchDesktop()
 	if (isOriginalDesktopActive) {	   // 是否在原始桌面
 		//hDesktop = CreateDesktop("Virtual", NULL, NULL, 0, GENERIC_ALL , NULL);	// 创建虚拟桌面
 		SetThreadDesktop(hDesktop);    // 设置桌面活动焦点是虚拟桌面 
-		SwitchDesktop(hDesktop);       // 
-		/*HWND hWnd = findWindow("百度云 安装");
-		Sleep(300);
-		::SendMessage(hWnd, WM_LBUTTONDOWN, MK_LBUTTON, MAKELONG(250, 290));
-		::SendMessage(hWnd, WM_LBUTTONUP, MK_LBUTTON, MAKELONG(250, 290));
-		Sleep(300);
-		POINT pt;
-		pt.x = 600;
-		pt.y = 340;
-		hWnd = fromPoint(pt);
-		char title[MAX_PATH] = { 0 };
-		::GetWindowText(hWnd, title, MAX_PATH - 1);
-		TRACE("%s\n", title);*/
+		SwitchDesktop(hDesktop);
 	} 
 	else {
 		SetThreadDesktop(hOriginalThread); // 设置桌面活动焦点是原始桌面 
@@ -186,7 +154,6 @@ DWORD WINAPI tpFromPoint(LPVOID pParam)
 	WndInfo *pWndInfo = (WndInfo *)pParam;
 	if (pWndInfo == NULL || pWndInfo->hEvent == NULL) return 1;
 	::SetThreadDesktop(pWndInfo->hDesktop);
-	//pWndInfo->hWnd = ::WindowFromPoint(pWndInfo->pt);
 	pWndInfo->hWnd = ::WindowFromPoint(pWndInfo->pt);
 	char classname[MAX_PATH] = { 0 };
 	::GetClassName(pWndInfo->hWnd, classname, sizeof(classname) - 1);
@@ -194,7 +161,7 @@ DWORD WINAPI tpFromPoint(LPVOID pParam)
 	CWnd *pWnd = CWnd::FromHandle(pWndInfo->hWnd);
 	CString title;
 	pWnd->GetWindowText(title);
-	TRACE("===> " + title + "\n");
+	TRACE("%d ===> %s\n", pWndInfo->hWnd, title);
 	::SetEvent(pWndInfo->hEvent);
 	return 0;
 }

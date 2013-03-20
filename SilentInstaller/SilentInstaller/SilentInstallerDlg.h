@@ -1,7 +1,10 @@
 #pragma once
 
 #include "WelcomePage.h"
+#include "SelectModePage.h"
 #include "SettingPage.h"
+#include "ConfirmPage.h"
+#include "InstallingPage.h"
 #include "FinishPage.h"
 
 #include "VirtualDesktop.h"
@@ -27,9 +30,12 @@ private:
 	int altX;    // Hot key id for ALT+X
 
 protected:
-	WelcomePage wPage;
-	SettingPage sPage;
-	FinishPage  fPage;
+	WelcomePage    wPage;
+	SelectModePage mPage;
+	SettingPage    sPage;
+	ConfirmPage    cPage;
+	InstallingPage iPage;
+	FinishPage     fPage;
 
 public:
 	VirtualDesktop *getVirtualDesktop();
@@ -44,5 +50,3 @@ public:
 	afx_msg void OnWizFinish();
 	afx_msg void OnCancel();
 };
-
-

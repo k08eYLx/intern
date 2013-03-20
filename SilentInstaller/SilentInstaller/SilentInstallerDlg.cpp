@@ -15,7 +15,10 @@ SilentInstallerDlg::SilentInstallerDlg()
 	// 去掉帮助按钮
 	m_psh.dwFlags &= ~PSH_HASHELP;          // 前缀是PSH_
 	wPage.m_psp.dwFlags &= ~PSP_HASHELP;    // 前缀是PSP_
+	mPage.m_psp.dwFlags &= ~PSP_HASHELP;
 	sPage.m_psp.dwFlags &= ~PSP_HASHELP;
+	cPage.m_psp.dwFlags &= ~PSP_HASHELP;
+	iPage.m_psp.dwFlags &= ~PSP_HASHELP;
 	fPage.m_psp.dwFlags &= ~PSP_HASHELP;
 
 	/*
@@ -24,7 +27,10 @@ SilentInstallerDlg::SilentInstallerDlg()
 	 * The framework postpones creation of the window for the page until the user selects that page.
 	 */
 	AddPage(&wPage);
+	AddPage(&mPage);
 	AddPage(&sPage);
+	AddPage(&cPage);
+	AddPage(&iPage);
 	AddPage(&fPage);
 
 	// 将Property sheet设置为向导模式
@@ -138,3 +144,4 @@ void SilentInstallerDlg::OnCancel()
 	::SendMessage(m_hWnd, WM_DESTROY, 0, 0);
 	exit(EXIT_SUCCESS);
 }
+

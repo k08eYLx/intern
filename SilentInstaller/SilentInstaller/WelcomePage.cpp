@@ -58,6 +58,8 @@ void WelcomePage::OnBnClickedListWindowsButton()
 	SilentInstallerDlg *pSiDlg = (SilentInstallerDlg *)GetParent();
 	VirtualDesktop *vDesktop = pSiDlg->getVirtualDesktop();
 	vDesktop->listWindows(&edit);
+
+	//*
 	HWND hWnd = vDesktop->findWindow("百度云 安装");
 	if (hWnd != NULL) {
 		// Son of a bitch, I made it!
@@ -65,20 +67,15 @@ void WelcomePage::OnBnClickedListWindowsButton()
 		// 自定义安装按钮
 		::SendMessage(hWnd, WM_LBUTTONDOWN, MK_LBUTTON, MAKELONG(250, 290));
 		::SendMessage(hWnd, WM_LBUTTONUP, MK_LBUTTON, MAKELONG(250, 290));
-		/*Sleep(300);
-		// 安装按钮
-		::SendMessage(hWnd, WM_LBUTTONDOWN, MK_LBUTTON, MAKELONG(450, 350));
-		::SendMessage(hWnd, WM_LBUTTONUP, MK_LBUTTON, MAKELONG(450, 350));
-		Sleep(10000);
-		// 完成按钮
-		::SendMessage(hWnd, WM_LBUTTONDOWN, MK_LBUTTON, MAKELONG(450, 350));
-		::SendMessage(hWnd, WM_LBUTTONUP, MK_LBUTTON, MAKELONG(450, 350));*/
-		Sleep(300);
-		POINT pt;
-		pt.x = 600;
-		pt.y = 340;
-		vDesktop->fromPoint(pt);
-	}
+	}//*/
+
+	/*
+	Sleep(300);
+	POINT pt;
+	pt.x = 650;
+	pt.y = 320;
+	vDesktop->fromPoint(pt);
+	//*/
 }
 
 

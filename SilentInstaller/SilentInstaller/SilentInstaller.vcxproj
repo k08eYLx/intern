@@ -102,7 +102,13 @@
     <None Include="res\SilentInstaller.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaiduYun.h" />
+    <ClInclude Include="ConfirmPage.h" />
     <ClInclude Include="FinishPage.h" />
+    <ClInclude Include="Installer.h" />
+    <ClInclude Include="WizardPage.h" />
+    <ClInclude Include="InstallingPage.h" />
+    <ClInclude Include="SelectModePage.h" />
     <ClInclude Include="SilentInstallerDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SettingPage.h" />
@@ -114,7 +120,13 @@
     <ClInclude Include="WindowFinder.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BaiduYun.cpp" />
+    <ClCompile Include="ConfirmPage.cpp" />
     <ClCompile Include="FinishPage.cpp" />
+    <ClCompile Include="Installer.cpp" />
+    <ClCompile Include="WizardPage.cpp" />
+    <ClCompile Include="InstallingPage.cpp" />
+    <ClCompile Include="SelectModePage.cpp" />
     <ClCompile Include="SilentInstallerDlg.cpp" />
     <ClCompile Include="SettingPage.cpp" />
     <ClCompile Include="SilentInstaller.cpp" />
