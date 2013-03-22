@@ -1,4 +1,4 @@
 intern
 ======
 
-intern repo, music crawler and media kb.
+intern repo, music crawler, media kb and silent installer.
