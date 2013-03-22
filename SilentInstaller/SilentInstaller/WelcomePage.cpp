@@ -14,7 +14,7 @@
 IMPLEMENT_DYNAMIC(WelcomePage, CPropertyPage)
 
 WelcomePage::WelcomePage()
-	: CPropertyPage(WelcomePage::IDD)
+	: WizardPage(WelcomePage::IDD)
 {
 }
 
@@ -41,8 +41,11 @@ END_MESSAGE_MAP()
 BOOL WelcomePage::OnSetActive()
 {
 	// TODO: Add your specialized code here and/or call the base class
-	CPropertySheet *sheet = (CPropertySheet *)GetParent();
-	sheet->SetWizardButtons(PSWIZB_NEXT);
+
+	pMainDialog = (SilentInstallerDlg *)GetParent();
+	vDesktop = pMainDialog->getVirtualDesktop();
+
+	pMainDialog->SetWizardButtons(PSWIZB_NEXT);
 
 	return CPropertyPage::OnSetActive();
 }
@@ -54,12 +57,9 @@ void WelcomePage::OnBnClickedListWindowsButton()
 	edit.SetWindowText("");
 	WindowFinder wndFinder;
 	wndFinder.listWindows(&edit);
-
-	SilentInstallerDlg *pSiDlg = (SilentInstallerDlg *)GetParent();
-	VirtualDesktop *vDesktop = pSiDlg->getVirtualDesktop();
 	vDesktop->listWindows(&edit);
 
-	//*
+	/*
 	HWND hWnd = vDesktop->findWindow("百度云 安装");
 	if (hWnd != NULL) {
 		// Son of a bitch, I made it!
@@ -70,11 +70,22 @@ void WelcomePage::OnBnClickedListWindowsButton()
 	}//*/
 
 	/*
+	HWND hInputWnd = NULL;
 	Sleep(300);
 	POINT pt;
 	pt.x = 650;
-	pt.y = 320;
-	vDesktop->fromPoint(pt);
+	pt.y = 340;
+	hInputWnd = vDesktop->fromPoint(pt);
+	if (hWnd != NULL) {
+		DWORD dwResult = 0;
+		::SendMessageTimeout(hInputWnd, WM_SETTEXT, NULL, (LPARAM)"D:\\BaiduYun\\", SMTO_ABORTIFHUNG, 100, &dwResult);
+		::SendMessage(hInputWnd, WM_CHAR, NULL, NULL);
+		
+		CString title;
+		SendMessageTimeout(hInputWnd, WM_GETTEXT, 256, (LPARAM)title.GetBuffer(256), SMTO_ABORTIFHUNG, 100, &dwResult);
+		title.ReleaseBuffer();
+		edit.SetWindowText(title);
+	}
 	//*/
 }
 
@@ -90,4 +101,12 @@ void WelcomePage::OnBnClickedListChildWindowsButton()
 	pSiDlg->getVirtualDesktop()->listWindows(&edit);
 	hWnd = pSiDlg->getVirtualDesktop()->findWindow("百度云 安装");
 	wndFinder.listChildWindows(hWnd, &edit);
+}
+
+
+LRESULT WelcomePage::OnWizardNext()
+{
+	// TODO: Add your specialized code here and/or call the base class
+
+	return CPropertyPage::OnWizardNext();
 }

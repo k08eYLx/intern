@@ -38,6 +38,15 @@ protected:
 	FinishPage     fPage;
 
 public:
+	inline WelcomePage&    getWelcomePage()    { return wPage; }
+	inline SelectModePage& getSelectModePage() { return mPage; }
+	inline SettingPage&    getSettingPage()    { return sPage; }
+	inline ConfirmPage&    getConfirmPage()    { return cPage; }
+	inline InstallingPage& getInstallingPage() { return iPage; }
+	inline FinishPage&     getFinishPage()     { return fPage; }
+
+
+public:
 	VirtualDesktop *getVirtualDesktop();
 
 protected:

@@ -26,6 +26,10 @@ bool WindowFinder::appendText(CEdit *pEdit, HWND hwnd)
 	if (pWnd != NULL) {
 		CString title;
 		pWnd->GetWindowText(title);
+		if (title.IsEmpty()) {
+			pWnd->SendMessage(WM_GETTEXT, MAX_PATH, (LPARAM)title.GetBuffer(MAX_PATH));
+			title.ReleaseBuffer();
+		}
 		if (!title.IsEmpty()) {
 			title.Append("\n");
 			int nLength = pEdit->SendMessage(WM_GETTEXTLENGTH);

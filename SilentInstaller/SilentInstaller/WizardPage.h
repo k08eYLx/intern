@@ -1,8 +1,11 @@
 #pragma once
 
-#include "SilentInstallerDlg.h"
+#include "VirtualDesktop.h"
 
 // WizardPage dialog
+const int QS_INSTALL = WM_USER + 1;
+
+class SilentInstallerDlg;
 
 /*
  * To be the base class of all the wizard pages.
@@ -12,12 +15,12 @@ class WizardPage : public CPropertyPage
 	DECLARE_DYNAMIC(WizardPage)
 
 public:
-	WizardPage();
 	WizardPage(UINT nIDTemplate);
 	virtual ~WizardPage();
 
 protected:
-	VirtualDesktop *vDesktop;
+	static SilentInstallerDlg *pMainDialog;
+	static VirtualDesktop *vDesktop;
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support

@@ -4,15 +4,15 @@
 #include "stdafx.h"
 #include "SilentInstaller.h"
 #include "SelectModePage.h"
-#include "afxdialogex.h"
 
+#include "SilentInstallerDlg.h"
 
 // SelectModePage dialog
 
 IMPLEMENT_DYNAMIC(SelectModePage, CPropertyPage)
 
 SelectModePage::SelectModePage(CWnd* pParent /*=NULL*/)
-	: CPropertyPage(SelectModePage::IDD)
+	: WizardPage(SelectModePage::IDD)
 {
 
 }
@@ -24,6 +24,13 @@ SelectModePage::~SelectModePage()
 void SelectModePage::DoDataExchange(CDataExchange* pDX)
 {
 	CPropertyPage::DoDataExchange(pDX);
+}
+
+
+BOOL SelectModePage::skipSettingPage()
+{
+	int index = pMainDialog->GetActiveIndex();
+	return pMainDialog->SetActivePage(index + 2);
 }
 
 
@@ -39,8 +46,7 @@ END_MESSAGE_MAP()
 BOOL SelectModePage::OnSetActive()
 {
 	// TODO: Add your specialized code here and/or call the base class
-	CPropertySheet *sheet = (CPropertySheet *)GetParent();
-	sheet->SetWizardButtons(PSWIZB_BACK | PSWIZB_NEXT);
+	pMainDialog->SetWizardButtons(PSWIZB_BACK | PSWIZB_NEXT);
 
 	return CPropertyPage::OnSetActive();
 }
@@ -49,24 +55,20 @@ BOOL SelectModePage::OnSetActive()
 LRESULT SelectModePage::OnWizardNext()
 {
 	// TODO: Add your specialized code here and/or call the base class
-
-	return CPropertyPage::OnWizardNext();
+	return skipSettingPage();
 }
 
 
 void SelectModePage::OnBnClickedFastInstallButton()
 {
 	// TODO: Add your control notification handler code here
-	CPropertySheet *pSheet = (CPropertySheet *)GetParent();
-	int index = pSheet->GetActiveIndex();
-	pSheet->SetActivePage(index + 2);
+	skipSettingPage();
 }
 
 
 void SelectModePage::OnBnClickedCustomizeInstallButton()
 {
 	// TODO: Add your control notification handler code here
-	CPropertySheet *pSheet = (CPropertySheet *)GetParent();
-	int index = pSheet->GetActiveIndex();
-	pSheet->SetActivePage(index + 1);
+	int index = pMainDialog->GetActiveIndex();
+	pMainDialog->SetActivePage(index + 1);
 }

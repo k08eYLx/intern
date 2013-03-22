@@ -6,13 +6,14 @@
 #include "SettingPage.h"
 #include "afxdialogex.h"
 
+#include "SilentInstallerDlg.h"
 
 // SettingPage dialog
 
 IMPLEMENT_DYNAMIC(SettingPage, CPropertyPage)
 
 SettingPage::SettingPage()
-	: CPropertyPage(SettingPage::IDD)
+	: WizardPage(SettingPage::IDD)
 	, m_strPath(_T(""))
 {
 
@@ -40,8 +41,7 @@ END_MESSAGE_MAP()
 BOOL SettingPage::OnSetActive()
 {
 	// TODO: Add your specialized code here and/or call the base class
-	CPropertySheet *sheet = (CPropertySheet *)GetParent();
-	sheet->SetWizardButtons(PSWIZB_BACK | PSWIZB_NEXT);
+	pMainDialog->SetWizardButtons(PSWIZB_BACK | PSWIZB_NEXT);
 
 	return CPropertyPage::OnSetActive();
 }
@@ -78,6 +78,8 @@ void SettingPage::OnBnClickedBrowseButton()
 LRESULT SettingPage::OnWizardNext()
 {
 	// TODO: Add your specialized code here and/or call the base class
+	pMainDialog->getConfirmPage().setInstallPath(m_strPath.GetBuffer());
+	m_strPath.ReleaseBuffer();
 
 	return CPropertyPage::OnWizardNext();
 }

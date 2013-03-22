@@ -99,7 +99,7 @@ void VirtualDesktop::switchDesktop()
 		//hDesktop = CreateDesktop("Virtual", NULL, NULL, 0, GENERIC_ALL , NULL);	// 创建虚拟桌面
 		SetThreadDesktop(hDesktop);    // 设置桌面活动焦点是虚拟桌面 
 		SwitchDesktop(hDesktop);
-	} 
+	}
 	else {
 		SetThreadDesktop(hOriginalThread); // 设置桌面活动焦点是原始桌面 
 		SwitchDesktop(hOriginalInput);     // 切换回原始桌面
@@ -153,15 +153,32 @@ DWORD WINAPI tpFromPoint(LPVOID pParam)
 {
 	WndInfo *pWndInfo = (WndInfo *)pParam;
 	if (pWndInfo == NULL || pWndInfo->hEvent == NULL) return 1;
-	::SetThreadDesktop(pWndInfo->hDesktop);
-	pWndInfo->hWnd = ::WindowFromPoint(pWndInfo->pt);
+	
+	VirtualDesktop *vDesktop = (VirtualDesktop *)pWndInfo->pVoid;
+	vDesktop->switchDesktop();
+
+	HWND hWnd = ::WindowFromPoint(pWndInfo->pt);
+	pWndInfo->hWnd = hWnd;
+
+	// caption
+    CString caption;
+	DWORD dwResult = 0;
+    SendMessageTimeout(hWnd, WM_GETTEXT, 256, (LPARAM)caption.GetBuffer(256),
+        SMTO_ABORTIFHUNG, 100, &dwResult);
+    caption.ReleaseBuffer();
+	TRACE("===> %s\n", caption);
+
 	char classname[MAX_PATH] = { 0 };
-	::GetClassName(pWndInfo->hWnd, classname, sizeof(classname) - 1);
+	::GetClassName(hWnd, classname, sizeof(classname) - 1);
 	TRACE("%d, %d ===> %s\n", pWndInfo->pt.x, pWndInfo->pt.y, classname);
+	
 	CWnd *pWnd = CWnd::FromHandle(pWndInfo->hWnd);
 	CString title;
 	pWnd->GetWindowText(title);
 	TRACE("%d ===> %s\n", pWndInfo->hWnd, title);
+	
+	vDesktop->switchDesktop();
+
 	::SetEvent(pWndInfo->hEvent);
 	return 0;
 }
@@ -176,6 +193,7 @@ HWND VirtualDesktop::fromPoint(POINT pt)
 	HANDLE hEvent = ::CreateEvent(NULL, FALSE, FALSE, "SyncEvent");
 	WndInfo *pWndInfo = new WndInfo();
 	ZeroMemory(pWndInfo, sizeof(WndInfo));
+	pWndInfo->pVoid = this;
 	pWndInfo->hEvent = hEvent;
 	pWndInfo->hDesktop = hDesktop;
 	pWndInfo->pt = pt;

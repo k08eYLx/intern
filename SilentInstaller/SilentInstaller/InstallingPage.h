@@ -1,8 +1,10 @@
 #pragma once
 
+#include "WizardPage.h"
+
 // InstallingPage dialog
 
-class InstallingPage : public CPropertyPage
+class InstallingPage : public WizardPage
 {
 	DECLARE_DYNAMIC(InstallingPage)
 
@@ -13,9 +15,6 @@ public:
 // Dialog Data
 	enum { IDD = IDD_INSTALLINGPAGE_DIALOG };
 
-private:
-	bool isInstalled;
-
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
@@ -23,5 +22,5 @@ protected:
 
 public:
 	virtual BOOL OnSetActive();
-	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
+	virtual LRESULT OnWizardNext();
 };

@@ -1,9 +1,10 @@
 #pragma once
 
+#include "WizardPage.h"
 
 // SettingPage dialog
 
-class SettingPage : public CPropertyPage
+class SettingPage : public WizardPage
 {
 	DECLARE_DYNAMIC(SettingPage)
 

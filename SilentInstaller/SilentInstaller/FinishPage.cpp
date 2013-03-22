@@ -6,15 +6,15 @@
 #include "FinishPage.h"
 #include "afxdialogex.h"
 
+#include "SilentInstallerDlg.h"
 
 // FinishPage dialog
 
 IMPLEMENT_DYNAMIC(FinishPage, CPropertyPage)
 
 FinishPage::FinishPage()
-	: CPropertyPage(FinishPage::IDD)
+	: WizardPage(FinishPage::IDD)
 {
-
 }
 
 FinishPage::~FinishPage()
@@ -37,9 +37,8 @@ END_MESSAGE_MAP()
 BOOL FinishPage::OnSetActive()
 {
 	// TODO: Add your specialized code here and/or call the base class
-	CPropertySheet *sheet = (CPropertySheet *)GetParent();
-	// | ~PSWIZB_CANCEL changes next button to finish button.
-	sheet->SetWizardButtons(PSWIZB_BACK | PSWIZB_FINISH);
+
+	pMainDialog->SetWizardButtons(PSWIZB_FINISH);
 
 	return CPropertyPage::OnSetActive();
 }

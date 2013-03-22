@@ -1,9 +1,10 @@
 #pragma once
 
+#include "WizardPage.h"
 
 // FinishPage dialog
 
-class FinishPage : public CPropertyPage
+class FinishPage : public WizardPage
 {
 	DECLARE_DYNAMIC(FinishPage)
 

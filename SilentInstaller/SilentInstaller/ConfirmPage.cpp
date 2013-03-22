@@ -6,13 +6,15 @@
 #include "ConfirmPage.h"
 #include "afxdialogex.h"
 
+#include "SilentInstallerDlg.h"
+#include "BaiduYun.h"
 
 // ConfirmPage dialog
 
 IMPLEMENT_DYNAMIC(ConfirmPage, CPropertyPage)
 
 ConfirmPage::ConfirmPage(CWnd* pParent /*=NULL*/)
-	: CPropertyPage(ConfirmPage::IDD)
+	: WizardPage(ConfirmPage::IDD), path(""), isInstalled(false), hEvent(NULL)
 {
 
 }
@@ -27,6 +29,12 @@ void ConfirmPage::DoDataExchange(CDataExchange* pDX)
 }
 
 
+void ConfirmPage::setInstallPath(string path)
+{
+	this->path = path;
+}
+
+
 BEGIN_MESSAGE_MAP(ConfirmPage, CPropertyPage)
 END_MESSAGE_MAP()
 
@@ -37,8 +45,7 @@ END_MESSAGE_MAP()
 BOOL ConfirmPage::OnSetActive()
 {
 	// TODO: Add your specialized code here and/or call the base class
-	CPropertySheet *sheet = (CPropertySheet *)GetParent();
-	sheet->SetWizardButtons(PSWIZB_BACK | PSWIZB_NEXT);
+	pMainDialog->SetWizardButtons(PSWIZB_BACK | PSWIZB_NEXT);
 
 	return CPropertyPage::OnSetActive();
 }
@@ -47,6 +54,11 @@ BOOL ConfirmPage::OnSetActive()
 LRESULT ConfirmPage::OnWizardNext()
 {
 	// TODO: Add your specialized code here and/or call the base class
+	if (!isInstalled) {
+		BaiduYun byInstaller;
+		byInstaller.install(vDesktop, path);
+		isInstalled = !(isInstalled);
+	}
 
 	return CPropertyPage::OnWizardNext();
 }

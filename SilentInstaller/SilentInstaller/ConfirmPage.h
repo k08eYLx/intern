@@ -1,9 +1,10 @@
 #pragma once
 
+#include "WizardPage.h"
 
 // ConfirmPage dialog
 
-class ConfirmPage : public CPropertyPage
+class ConfirmPage : public WizardPage
 {
 	DECLARE_DYNAMIC(ConfirmPage)
 
@@ -13,6 +14,14 @@ public:
 
 // Dialog Data
 	enum { IDD = IDD_CONFIRMPAGE_DIALOG };
+
+private:
+	HANDLE hEvent;
+	bool isInstalled;
+	string path;
+
+public:
+	void setInstallPath(string path);
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support

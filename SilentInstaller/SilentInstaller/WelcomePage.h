@@ -1,10 +1,10 @@
 #pragma once
-#include "afxwin.h"
 
+#include "WizardPage.h"
 
 // WelcomePage dialog
 
-class WelcomePage : public CPropertyPage
+class WelcomePage : public WizardPage
 {
 	DECLARE_DYNAMIC(WelcomePage)
 
@@ -23,8 +23,12 @@ protected:
 private:
 	CEdit edit;
 
+private:
+	HWND findWindow(POINT point);
+
 public:
 	virtual BOOL OnSetActive();
 	afx_msg void OnBnClickedListWindowsButton();
 	afx_msg void OnBnClickedListChildWindowsButton();
+	virtual LRESULT OnWizardNext();
 };

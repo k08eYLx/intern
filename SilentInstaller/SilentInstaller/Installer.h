@@ -10,7 +10,7 @@ public:
 	virtual ~Installer(void);
 
 public:
-	virtual bool install(VirtualDesktop *vDesktop) = 0;
+	virtual bool install(VirtualDesktop *vDesktop, string path) = 0;
 
 protected:
 	HWND hWnd;

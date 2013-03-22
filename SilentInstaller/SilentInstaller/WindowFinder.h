@@ -4,6 +4,7 @@
 // WindowFinder
 
 struct WndInfo {
+	void*   pVoid;
 	HANDLE  hEvent;
 	HDESK   hDesktop;
 	string  title;

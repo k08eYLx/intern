@@ -1,9 +1,10 @@
 #pragma once
 
+#include "WizardPage.h"
 
 // SelectModePage dialog
 
-class SelectModePage : public CPropertyPage
+class SelectModePage : public WizardPage
 {
 	DECLARE_DYNAMIC(SelectModePage)
 
@@ -13,6 +14,9 @@ public:
 
 // Dialog Data
 	enum { IDD = IDD_SELECTMODEPAGE_DIALOG };
+
+private:
+	BOOL skipSettingPage();
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support

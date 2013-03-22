@@ -6,15 +6,19 @@
 #include "WizardPage.h"
 #include "afxdialogex.h"
 
+#include "SilentInstallerDlg.h"
 
 // InstallerPage dialog
+
+SilentInstallerDlg *WizardPage::pMainDialog = NULL;
+VirtualDesktop *WizardPage::vDesktop = NULL;
 
 IMPLEMENT_DYNAMIC(WizardPage, CPropertyPage)
 
 WizardPage::WizardPage(UINT nIDTemplate)
 	: CPropertyPage(nIDTemplate)
 {
-	vDesktop = ((SilentInstallerDlg *)GetParent())->getVirtualDesktop();
+	
 }
 
 WizardPage::~WizardPage()
