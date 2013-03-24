@@ -54,8 +54,6 @@ public:
 	HWND findWindow(string title);                      // Find window on VD
 	friend DWORD WINAPI tpFindWindow(LPVOID pParam);    // Thread procedure for find window
 
-	HWND fromPoint(POINT pt);                           // Find window by POINT on VD
-
 protected:
 	DECLARE_MESSAGE_MAP()
 };

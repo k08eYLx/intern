@@ -55,9 +55,9 @@ void WelcomePage::OnBnClickedListWindowsButton()
 {
 	// TODO: Add your control notification handler code here
 	
-	edit.SetWindowText("");
-	vDesktop->listWindows(&edit);
-	
+	/*edit.SetWindowText("");
+	vDesktop->listWindows(&edit);*/
+
 	/*
 	WindowFinder wndFinder;
 	HWND hWnd = vDesktop->findWindow("百度云 安装");

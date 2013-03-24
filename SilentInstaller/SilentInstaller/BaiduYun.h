@@ -43,6 +43,9 @@ private:
 	const int LOGIN_BTN_X;
 	const int LOGIN_BTN_Y;
 
+	const string CONFIG_WND_CLSNAME;
+	const int    CONFIG_WND_WIDTH;      // 设置本地同步文件夹路径的窗口宽度
+
 	// 设置本地同步文件夹路径的控件
 	const int SYNC_PATH_EDIT_LENGTH;    // 336
 
@@ -59,6 +62,8 @@ private:
 	void complete();    // 完成安装
 	void login(string usr, string pswd);
 	void config(string path);
+	HWND findConfigWnd();
+	void configSyncDir(string path);
 	void walkWizard();
 	void finish();     // 结束整个安装及设置等过程
 

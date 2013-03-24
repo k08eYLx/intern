@@ -26,21 +26,17 @@ bool WindowFinder::appendText(CEdit *pEdit, HWND hwnd)
 	if (pWnd != NULL) {
 		CString title;
 		pWnd->GetWindowText(title);
-
 		if (title.IsEmpty()) {
 			pWnd->SendMessage(WM_GETTEXT, MAX_PATH, (LPARAM)title.GetBuffer(MAX_PATH));
 			title.ReleaseBuffer();
-			//*
-			RECT rect;
-			pWnd->GetWindowRect(&rect);
-
-			char classname[MAX_PATH] = { 0 };
-			::GetClassName(hwnd, classname, sizeof(classname) - 1);
-			TRACE("%d ===> %s\n", (rect.right - rect.left), classname);//*/
-			if (strcmp(classname, "BaseGui") == 0) {
-				::EnumChildWindows(hwnd, EnumChildProc, (LPARAM)pEdit);
-			}
 		}
+		
+		/*
+		RECT rect;
+		pWnd->GetWindowRect(&rect);
+		char classname[MAX_PATH] = { 0 };
+		::GetClassName(hwnd, classname, sizeof(classname) - 1);
+		TRACE("%d ===> %s\n", (rect.right - rect.left), classname);//*/
 
 		if (!title.IsEmpty()) {
 			title.Append("\n");
@@ -120,18 +116,16 @@ BOOL CALLBACK EnumWndInfoProc(HWND hWnd, LPARAM lParam)
 
 		char clsName[MAX_PATH] = { 0 };
 		::GetClassName(hWnd, clsName, sizeof(clsName) - 1);
-		
-		if (pData->clsName.empty()) {
+		if (pData->clsName.empty() || clsName == pData->clsName) {
 			RECT rect;
 			pWnd->GetWindowRect(&rect);
 			wInfo.length = rect.right - rect.left;
 			pData->wInfos.push_back(wInfo);
 		}
-		else if (clsName == pData->clsName) {
-			pData->wInfos.push_back(wInfo);
-		}
+
+		return TRUE;
 	}
-    return TRUE; 
+    return FALSE;
 }
 
 

@@ -52,7 +52,7 @@ void VirtualDesktop::create()
 		/*::CreateProcess(NULL, "C:\\Windows\\explorer.exe", NULL, NULL, TRUE
 			, NORMAL_PRIORITY_CLASS, NULL, NULL, &startupInfo, &processInfo);*/
 
-		CString commandLine = "C:\\Users\\lihongzhen\\AppData\\Roaming\\Baidu\\BaiduYun\\baiduyun.exe"; // "BaiduYun.exe";
+		CString commandLine = "D:\\ktv\\BaiduYun\\baiduyun.exe"; // "BaiduYun.exe";
 		::CreateProcess(NULL, (CT2A)commandLine, NULL, NULL, TRUE
 			, NORMAL_PRIORITY_CLASS, NULL, NULL, &startupInfo, &processInfo);
 
@@ -156,36 +156,6 @@ HWND VirtualDesktop::findWindow(string title)
 	CloseHandle(hEvent);
 	CloseHandle(hThread);
 	return td.wi.hWnd;
-}
-
-
-/*
- * 新创建一个线程，
- * 在线程内执行SetThreadDesktop关联到指定桌面，
- * 然后针对此桌面使用FindWindow。
- */
-HWND VirtualDesktop::fromPoint(POINT pt)
-{
-	HWND hWnd = NULL;
-
-	switchDesktop();
-	hWnd = ::WindowFromPoint(pt);
-	switchDesktop();
-
-	// caption
-    CString caption;
-	DWORD dwResult = 0;
-    SendMessageTimeout(hWnd, WM_GETTEXT, 256, (LPARAM)caption.GetBuffer(256),
-        SMTO_ABORTIFHUNG, 100, &dwResult);
-    caption.ReleaseBuffer();
-	TRACE("===> %s\n", caption);
-
-	// class name
-	char clsName[MAX_PATH] = { 0 };
-	::GetClassName(hWnd, clsName, sizeof(clsName) - 1);
-	TRACE("%d, %d ===> %s\n", pt.x, pt.y, clsName);
-
-	return hWnd;
 }
 
 
