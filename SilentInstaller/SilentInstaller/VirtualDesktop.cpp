@@ -52,7 +52,7 @@ void VirtualDesktop::create()
 		/*::CreateProcess(NULL, "C:\\Windows\\explorer.exe", NULL, NULL, TRUE
 			, NORMAL_PRIORITY_CLASS, NULL, NULL, &startupInfo, &processInfo);*/
 
-		CString commandLine = "BaiduYun.exe";    // "explorer"
+		CString commandLine = "C:\\Users\\lihongzhen\\AppData\\Roaming\\Baidu\\BaiduYun\\baiduyun.exe"; // "BaiduYun.exe";
 		::CreateProcess(NULL, (CT2A)commandLine, NULL, NULL, TRUE
 			, NORMAL_PRIORITY_CLASS, NULL, NULL, &startupInfo, &processInfo);
 
@@ -115,13 +115,25 @@ void VirtualDesktop::listWindows(CEdit *pEdit)
 }
 
 
+void VirtualDesktop::findWindows(ProcedureData &pd)
+{
+	wndFinder.findWindows(hDesktop, &pd);
+}
+
+
+void VirtualDesktop::findChildWindows(HWND hWndParent, ProcedureData &pd)
+{
+	wndFinder.findChildWindows(hWndParent, &pd);
+}
+
+
 DWORD WINAPI tpFindWindow(LPVOID pParam)
 {
-	WndInfo *pWndInfo = (WndInfo *)pParam;
-	if (pWndInfo == NULL || pWndInfo->hEvent == NULL) return 1;
-	::SetThreadDesktop(pWndInfo->hDesktop);
-	pWndInfo->hWnd = ::FindWindow(NULL, (pWndInfo->title).c_str());
-	::SetEvent(pWndInfo->hEvent);
+	ThreadData *pTd = (ThreadData *)pParam;
+	if (pTd == NULL || pTd->hEvent == NULL) return 1;
+	::SetThreadDesktop(pTd->wi.hDesktop);
+	pTd->wi.hWnd = ::FindWindow(NULL, (pTd->wi.title).c_str());
+	::SetEvent(pTd->hEvent);
 	return 0;
 }
 
@@ -133,32 +145,32 @@ DWORD WINAPI tpFindWindow(LPVOID pParam)
 HWND VirtualDesktop::findWindow(string title)
 {
 	HANDLE hEvent = ::CreateEvent(NULL, FALSE, FALSE, "SyncEvent");
-	WndInfo *pWndInfo = new WndInfo();
-	ZeroMemory(pWndInfo, sizeof(WndInfo));
-	pWndInfo->hEvent = hEvent;
-	pWndInfo->hDesktop = hDesktop;
-	pWndInfo->title = title;
+	ThreadData td;
+	ZeroMemory(&td, sizeof(ThreadData));
+	td.hEvent = hEvent;
+	td.wi.hDesktop = hDesktop;
+	td.wi.title = title;
 	HANDLE hThread = CreateThread(NULL, 0,
-		tpFindWindow, (LPVOID)pWndInfo, 0, NULL);
+		tpFindWindow, (LPVOID)&td, 0, NULL);
 	WaitForSingleObject(hEvent, INFINITE);
 	CloseHandle(hEvent);
 	CloseHandle(hThread);
-	HWND hWnd = pWndInfo->hWnd;
-	if (pWndInfo != NULL) delete pWndInfo;
-	return hWnd;
+	return td.wi.hWnd;
 }
 
 
-DWORD WINAPI tpFromPoint(LPVOID pParam)
+/*
+ * 新创建一个线程，
+ * 在线程内执行SetThreadDesktop关联到指定桌面，
+ * 然后针对此桌面使用FindWindow。
+ */
+HWND VirtualDesktop::fromPoint(POINT pt)
 {
-	WndInfo *pWndInfo = (WndInfo *)pParam;
-	if (pWndInfo == NULL || pWndInfo->hEvent == NULL) return 1;
-	
-	VirtualDesktop *vDesktop = (VirtualDesktop *)pWndInfo->pVoid;
-	vDesktop->switchDesktop();
+	HWND hWnd = NULL;
 
-	HWND hWnd = ::WindowFromPoint(pWndInfo->pt);
-	pWndInfo->hWnd = hWnd;
+	switchDesktop();
+	hWnd = ::WindowFromPoint(pt);
+	switchDesktop();
 
 	// caption
     CString caption;
@@ -168,42 +180,11 @@ DWORD WINAPI tpFromPoint(LPVOID pParam)
     caption.ReleaseBuffer();
 	TRACE("===> %s\n", caption);
 
-	char classname[MAX_PATH] = { 0 };
-	::GetClassName(hWnd, classname, sizeof(classname) - 1);
-	TRACE("%d, %d ===> %s\n", pWndInfo->pt.x, pWndInfo->pt.y, classname);
-	
-	CWnd *pWnd = CWnd::FromHandle(pWndInfo->hWnd);
-	CString title;
-	pWnd->GetWindowText(title);
-	TRACE("%d ===> %s\n", pWndInfo->hWnd, title);
-	
-	vDesktop->switchDesktop();
+	// class name
+	char clsName[MAX_PATH] = { 0 };
+	::GetClassName(hWnd, clsName, sizeof(clsName) - 1);
+	TRACE("%d, %d ===> %s\n", pt.x, pt.y, clsName);
 
-	::SetEvent(pWndInfo->hEvent);
-	return 0;
-}
-
-/*
- * 新创建一个线程，
- * 在线程内执行SetThreadDesktop关联到指定桌面，
- * 然后针对此桌面使用FindWindow。
- */
-HWND VirtualDesktop::fromPoint(POINT pt)
-{
-	HANDLE hEvent = ::CreateEvent(NULL, FALSE, FALSE, "SyncEvent");
-	WndInfo *pWndInfo = new WndInfo();
-	ZeroMemory(pWndInfo, sizeof(WndInfo));
-	pWndInfo->pVoid = this;
-	pWndInfo->hEvent = hEvent;
-	pWndInfo->hDesktop = hDesktop;
-	pWndInfo->pt = pt;
-	HANDLE hThread = CreateThread(NULL, 0,
-		tpFromPoint, (LPVOID)pWndInfo, 0, NULL);
-	WaitForSingleObject(hEvent, INFINITE);
-	CloseHandle(hEvent);
-	CloseHandle(hThread);
-	HWND hWnd = pWndInfo->hWnd;
-	if (pWndInfo != NULL) delete pWndInfo;
 	return hWnd;
 }
 

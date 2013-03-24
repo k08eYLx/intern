@@ -16,7 +16,7 @@ public:
 	enum { IDD = IDD_SELECTMODEPAGE_DIALOG };
 
 private:
-	BOOL skipSettingPage();
+	BOOL fastInstall(BOOL isFastInstall);
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support

@@ -4,13 +4,19 @@
 // WindowFinder
 
 struct WndInfo {
-	void*   pVoid;
-	HANDLE  hEvent;
 	HDESK   hDesktop;
 	string  title;
 	POINT   pt;
 	HWND    hWnd;
+	HWND    hParent;
+	int     length;
 };
+
+struct ProcedureData {
+	string clsName;
+	vector<WndInfo> wInfos;
+};
+
 
 class WindowFinder : public CWnd
 {
@@ -21,15 +27,21 @@ public:
 	virtual ~WindowFinder();
 
 public:
+	friend BOOL CALLBACK EnumWindowsProc(HWND hwnd, DWORD lParam);
 	void listWindows(CEdit *pEdit);
 	void listWindows(HDESK hDesktop, CEdit *pEdit);
-	void listChildWindows(HWND hWndParent, CEdit *pEdit);
-	HWND find(CString name);
-	HWND findChild(CString name);
-	static bool appendText(CEdit *pEdit, HWND hwnd);
-
-	friend BOOL CALLBACK EnumWindowsProc(HWND hwnd, DWORD lParam);
+	
 	friend BOOL CALLBACK EnumChildProc(HWND hWndChild, LPARAM lParam);
+	void listChildWindows(HWND hWndParent, CEdit *pEdit);
+	
+	friend BOOL CALLBACK EnumWndInfoProc(HWND hWnd, LPARAM lParam);
+	void findWindows(HDESK hDesktop, ProcedureData *pData);
+
+	friend BOOL CALLBACK EnumChildInfoProc(HWND hWndChild, LPARAM lParam);
+	void findChildWindows(HWND hWndParent, ProcedureData *pData);
+
+	HWND find(CString name);
+	static bool appendText(CEdit *pEdit, HWND hwnd);
 
 protected:
 	DECLARE_MESSAGE_MAP()

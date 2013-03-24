@@ -30,7 +30,7 @@ SilentInstallerDlg::SilentInstallerDlg()
 	AddPage(&mPage);
 	AddPage(&sPage);
 	AddPage(&cPage);
-	AddPage(&iPage);
+	//AddPage(&iPage);
 	AddPage(&fPage);
 
 	// 将Property sheet设置为向导模式

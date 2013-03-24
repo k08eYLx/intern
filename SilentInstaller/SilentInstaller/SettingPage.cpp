@@ -71,13 +71,18 @@ void SettingPage::OnBnClickedBrowseButton()
     }
 
 	UpdateData(FALSE);    // 使用变量里的内容更新控件上显示的内容
-	TRACE("\n===> %s <===\n", m_strPath);
 }
 
 
 LRESULT SettingPage::OnWizardNext()
 {
 	// TODO: Add your specialized code here and/or call the base class
+	UpdateData(TRUE);     // 使用控件上显示的内容更新变量里的内容
+	TRACE("\n===> %s <===\n", m_strPath);
+	
+	USES_CONVERSION;    // 加在调用宏进行转换之前
+	SHCreateDirectory(NULL, A2CW(m_strPath));
+
 	pMainDialog->getConfirmPage().setInstallPath(m_strPath.GetBuffer());
 	m_strPath.ReleaseBuffer();
 

@@ -1,8 +1,10 @@
 #include "StdAfx.h"
 #include "Installer.h"
 
+#include "Tlhelp32.h"
 
 Installer::Installer(void)
+	: vDesktop(NULL), hWnd(NULL)
 {
 }
 
@@ -112,4 +114,27 @@ void Installer::deleteStartupMenuShortcutDir(string dirName)
 	
 	// 删除开始菜单快捷方式目录
 	rmDir(szShortcut);
+}
+
+
+void Installer::killProcess(string name)
+{
+	PROCESSENTRY32 pe32;
+	pe32.dwSize = sizeof(pe32);
+	
+	HANDLE hSnapshot = ::CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+	if (hSnapshot == INVALID_HANDLE_VALUE) return;
+	
+	BOOL isRunning = Process32First(hSnapshot, &pe32);
+	while (isRunning) {
+		if (pe32.szExeFile == name) {
+			DWORD pid = pe32.th32ProcessID;
+			HANDLE hProcess = ::OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
+			if (hProcess != NULL) {
+				::TerminateProcess(hProcess, 0);
+				::CloseHandle(hProcess);
+			}
+		}
+		isRunning = ::Process32Next(hSnapshot, &pe32);
+	}
 }

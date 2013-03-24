@@ -27,10 +27,11 @@ void SelectModePage::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BOOL SelectModePage::skipSettingPage()
+BOOL SelectModePage::fastInstall(BOOL isFastInstall)
 {
 	int index = pMainDialog->GetActiveIndex();
-	return pMainDialog->SetActivePage(index + 2);
+	index += isFastInstall + 1;
+	return pMainDialog->SetActivePage(index);
 }
 
 
@@ -55,20 +56,25 @@ BOOL SelectModePage::OnSetActive()
 LRESULT SelectModePage::OnWizardNext()
 {
 	// TODO: Add your specialized code here and/or call the base class
-	return skipSettingPage();
+	/*
+	 * 0 to automatically advance to the next page; ¨C1 to prevent the page from changing.
+	 * To jump to a page other than the next one, return the identifier of the dialog to be displayed.
+	 */
+	return IDD_CONFIRMPAGE_DIALOG;
 }
 
 
+// Skip to setting page, jump to confirm page.
 void SelectModePage::OnBnClickedFastInstallButton()
 {
 	// TODO: Add your control notification handler code here
-	skipSettingPage();
+	fastInstall(TRUE);
 }
 
 
+// Jump to setting page.
 void SelectModePage::OnBnClickedCustomizeInstallButton()
 {
 	// TODO: Add your control notification handler code here
-	int index = pMainDialog->GetActiveIndex();
-	pMainDialog->SetActivePage(index + 1);
+	fastInstall(FALSE);
 }

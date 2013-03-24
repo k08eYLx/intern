@@ -13,6 +13,7 @@
 */doc/
 */logs/
 
+*/*.aps
 */*.sdf
 */*.suo
 */Debug/

@@ -38,8 +38,10 @@
 #include <afxcontrolbars.h>     // MFC support for ribbons and control bars
 #include <afxdlgs.h>
 
+#include <AtlConv.h>
 
 #include <string>
+#include <vector>
 using namespace std;
 
 

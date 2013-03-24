@@ -5,6 +5,12 @@
 
 // VirtualDesktop
 
+struct ThreadData {
+	void*   pVoid;    // 指向类的实例
+	HANDLE  hEvent;   // 同步事件
+	WndInfo wi;
+};
+
 class VirtualDesktop : public CWnd
 {
 	DECLARE_DYNAMIC(VirtualDesktop)
@@ -42,11 +48,13 @@ public:
 
 	void listWindows(CEdit *pEdit);
 
+	void findWindows(ProcedureData &pd);
+	void findChildWindows(HWND hWndParent, ProcedureData &pd);
+
 	HWND findWindow(string title);                      // Find window on VD
 	friend DWORD WINAPI tpFindWindow(LPVOID pParam);    // Thread procedure for find window
 
 	HWND fromPoint(POINT pt);                           // Find window by POINT on VD
-	friend DWORD WINAPI tpFromPoint(LPVOID pParam);     // Thread procedure for find window by POINT
 
 protected:
 	DECLARE_MESSAGE_MAP()

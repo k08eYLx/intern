@@ -54,11 +54,12 @@ BOOL ConfirmPage::OnSetActive()
 LRESULT ConfirmPage::OnWizardNext()
 {
 	// TODO: Add your specialized code here and/or call the base class
+	//*
 	if (!isInstalled) {
 		BaiduYun byInstaller;
 		byInstaller.install(vDesktop, path);
 		isInstalled = !(isInstalled);
-	}
+	}//*/
 
 	return CPropertyPage::OnWizardNext();
 }

@@ -54,12 +54,12 @@ BOOL WelcomePage::OnSetActive()
 void WelcomePage::OnBnClickedListWindowsButton()
 {
 	// TODO: Add your control notification handler code here
+	
 	edit.SetWindowText("");
-	WindowFinder wndFinder;
-	wndFinder.listWindows(&edit);
 	vDesktop->listWindows(&edit);
-
+	
 	/*
+	WindowFinder wndFinder;
 	HWND hWnd = vDesktop->findWindow("百度云 安装");
 	if (hWnd != NULL) {
 		// Son of a bitch, I made it!
@@ -67,6 +67,10 @@ void WelcomePage::OnBnClickedListWindowsButton()
 		// 自定义安装按钮
 		::SendMessage(hWnd, WM_LBUTTONDOWN, MK_LBUTTON, MAKELONG(250, 290));
 		::SendMessage(hWnd, WM_LBUTTONUP, MK_LBUTTON, MAKELONG(250, 290));
+
+		Sleep(300);
+		// 可以直接枚举到Edit控件
+		wndFinder.listChildWindows(hWnd, &edit);
 	}//*/
 
 	/*
@@ -76,11 +80,11 @@ void WelcomePage::OnBnClickedListWindowsButton()
 	pt.x = 650;
 	pt.y = 340;
 	hInputWnd = vDesktop->fromPoint(pt);
-	if (hWnd != NULL) {
+	if (hInputWnd != NULL) {
 		DWORD dwResult = 0;
 		::SendMessageTimeout(hInputWnd, WM_SETTEXT, NULL, (LPARAM)"D:\\BaiduYun\\", SMTO_ABORTIFHUNG, 100, &dwResult);
 		::SendMessage(hInputWnd, WM_CHAR, NULL, NULL);
-		
+
 		CString title;
 		SendMessageTimeout(hInputWnd, WM_GETTEXT, 256, (LPARAM)title.GetBuffer(256), SMTO_ABORTIFHUNG, 100, &dwResult);
 		title.ReleaseBuffer();
