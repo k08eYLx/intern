@@ -59,8 +59,6 @@ bool BaiduYun::install(VirtualDesktop *vDesktop, string path)
 		}
 	}
 
-	hWnd = NULL;    // 确保为空
-
 	for (int i = 0; i < RETRY_MANY_TIMES; ++i) {
 		// hWnd 保存了安装程序主窗口的句柄
 		hWnd = vDesktop->findWindow(INSTALL_WIN_TITLE);
@@ -80,8 +78,7 @@ bool BaiduYun::install(VirtualDesktop *vDesktop, string path)
 		}
 	}
 		
-	//login("yang_lian_xiang@126.com", "abc123");
-			
+	//login("yang_lian_xiang@126.com", "abc123");	
 	return true;
 }
 
