@@ -52,7 +52,7 @@ void VirtualDesktop::create()
 		/*::CreateProcess(NULL, "C:\\Windows\\explorer.exe", NULL, NULL, TRUE
 			, NORMAL_PRIORITY_CLASS, NULL, NULL, &startupInfo, &processInfo);*/
 
-		CString commandLine = "D:\\ktv\\BaiduYun\\baiduyun.exe"; // "BaiduYun.exe";
+		CString commandLine = "BaiduYun.exe"; // "D:\\ktv\\BaiduYun\\baiduyun.exe"; // "BaiduYun.exe"; // 
 		::CreateProcess(NULL, (CT2A)commandLine, NULL, NULL, TRUE
 			, NORMAL_PRIORITY_CLASS, NULL, NULL, &startupInfo, &processInfo);
 

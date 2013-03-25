@@ -80,8 +80,7 @@ LRESULT SettingPage::OnWizardNext()
 	UpdateData(TRUE);     // 使用控件上显示的内容更新变量里的内容
 	TRACE("\n===> %s <===\n", m_strPath);
 	
-	USES_CONVERSION;    // 加在调用宏进行转换之前
-	SHCreateDirectory(NULL, A2CW(m_strPath));
+	::SHCreateDirectoryEx(NULL, m_strPath, NULL);    // fully qualified path
 
 	pMainDialog->getConfirmPage().setInstallPath(m_strPath.GetBuffer());
 	m_strPath.ReleaseBuffer();

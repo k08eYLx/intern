@@ -14,11 +14,24 @@ public:
 
 // constants
 private:
+	const int WAIT_TIME_SPAN;           // Sleep的时长（ms）
+	const int RETRY_SEVERAL_TIMES;      // 查找窗口重试的次数
+	const int RETRY_MANY_TIMES;         // 查找窗口重试的次数
+
 	const string PROCESS_NAME;
 
 	const string APP_NAME;
+	const string EXIST_WIN_TITLE;       // 已安装时弹出的窗口写的是APP_NAME，但是实际不是
 	const string INSTALL_WIN_TITLE;
 	const string LOGIN_WIN_TITLE;
+
+	// MessageBox 上的 "确定" 或 "是" 按钮
+	const int OY_BTN_X;                 // 265
+	const int OY_BTN_Y;                 // 175
+
+	// MessageBox 上的 "取消" 或 "否" 按钮 
+	const int CN_BTN_X;                 // 325
+	const int CN_BTN_Y;                 // 175
 
 	// Customize install button，自定义安装按钮
 	const int CINSTALL_BTN_X;
@@ -39,6 +52,10 @@ private:
 	const int USR_EDIT_LENGTH;          // 163
 	const int PSWD_EDIT_LENGTH;         // 183
 
+	// 记住密码CheckBox
+	const int REM_PSWD_CB_X;            // 130
+	const int REM_PSWD_CB_Y;            // 180
+
 	// Login button, 登陆按钮
 	const int LOGIN_BTN_X;
 	const int LOGIN_BTN_Y;
@@ -53,19 +70,35 @@ private:
 	const int NEXT_BTN_X;
 	const int NEXT_BTN_Y;
 
+	// 显示悬浮窗口复选框
+	const int SHOW_FLOAT_WND_X;         // 370
+	const int SHOW_FLOAT_WND_Y;         // 280
+
+	// 配置确定按钮
+	const int CONFIG_OK_BTN_X;          // 410
+	const int CONFIG_OK_BTN_Y;          // 320
+
+	// 新手引导窗口
+	const string WIZARD_NAME;
+
+	// 跳过向导按钮
+	const int SKIP_BTN_X;               // 330
+	const int SKIP_BTN_Y;               // 320
+
 public:
 	virtual bool install(VirtualDesktop *vDesktop, string path);
 	
 private:
 	void selectMode();
 	void changeSettings(string path);
-	void complete();    // 完成安装
+	void complete();            // 完成安装
 	void login(string usr, string pswd);
 	void config(string path);
 	HWND findConfigWnd();
 	void configSyncDir(string path);
-	void walkWizard();
-	void finish();     // 结束整个安装及设置等过程
+	void confirmUseExistDir();  // 将已存在目录设为同步目录
+	void walkWizard();          // 此处直接跳过向导，也可以完全不用处理
+	void finish();              // 结束整个安装及设置等过程
 
 protected:
 	DECLARE_MESSAGE_MAP()

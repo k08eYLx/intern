@@ -2,7 +2,7 @@
 
 #include "VirtualDesktop.h"
 
-
+// abstract as base class
 class Installer
 {
 public:
@@ -24,5 +24,7 @@ protected:
 	void deleteShortcuts(string name);
 	void deleteDesktopShortcut(string name);
 	void deleteStartupMenuShortcutDir(string dirName);
+
+public:
 	void killProcess(string name);
 };

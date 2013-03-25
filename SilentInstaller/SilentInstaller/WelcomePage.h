@@ -4,6 +4,8 @@
 
 // WelcomePage dialog
 
+// Most of the time, this page is just for test.
+
 class WelcomePage : public WizardPage
 {
 	DECLARE_DYNAMIC(WelcomePage)

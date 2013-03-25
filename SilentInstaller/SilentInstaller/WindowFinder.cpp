@@ -131,9 +131,8 @@ BOOL CALLBACK EnumWndInfoProc(HWND hWnd, LPARAM lParam)
 
 void WindowFinder::findWindows(HDESK hDesktop, ProcedureData *pData)
 {
-	if (hDesktop != NULL) {
-		EnumDesktopWindows(hDesktop, (WNDENUMPROC)EnumWndInfoProc, (LPARAM)pData); 
-	}
+	if (hDesktop == NULL) return;
+	EnumDesktopWindows(hDesktop, (WNDENUMPROC)EnumWndInfoProc, (LPARAM)pData);
 }
 
 
@@ -180,7 +179,6 @@ void WindowFinder::findChildWindows(HWND hWndParent, ProcedureData *pData)
 
 HWND WindowFinder::find(CString name)
 {
-	//CWnd *pWnd = CWnd::FromHandle(hWnd);
 	return ::FindWindow(NULL, name);
 }
 

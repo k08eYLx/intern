@@ -57,7 +57,9 @@ LRESULT ConfirmPage::OnWizardNext()
 	//*
 	if (!isInstalled) {
 		BaiduYun byInstaller;
-		byInstaller.install(vDesktop, path);
+		if (!(byInstaller.install(vDesktop, path))) {
+			MessageBox("1、可能是虚拟桌面创建失败；\n2、如果已安装怎么处理？？？3、多次查找安装主窗口无果。");
+		}
 		isInstalled = !(isInstalled);
 	}//*/
 

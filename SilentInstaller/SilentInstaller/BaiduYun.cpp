@@ -11,18 +11,26 @@
 IMPLEMENT_DYNAMIC(BaiduYun, CWnd)
 
 BaiduYun::BaiduYun()
-	: PROCESS_NAME("baiduyun.exe"), APP_NAME("百度云"),
-	  INSTALL_WIN_TITLE("百度云 安装"),
+	: WAIT_TIME_SPAN(100), RETRY_SEVERAL_TIMES(3), RETRY_MANY_TIMES(12),
+	  PROCESS_NAME("baiduyun.exe"), APP_NAME("百度云"),
+	  EXIST_WIN_TITLE("百度云安装"),     // 没有空格
+	  INSTALL_WIN_TITLE("百度云 安装"),  // 有空格
 	  LOGIN_WIN_TITLE("欢迎使用百度云"),
+	  OY_BTN_X(265), OY_BTN_Y(175),
+	  CN_BTN_X(325), CN_BTN_Y(175),
 	  CINSTALL_BTN_X(250), CINSTALL_BTN_Y(290),
 	  PATH_CTRL_CLSNAME("Edit"),
 	  INSTALL_BTN_X(450), INSTALL_BTN_Y(350),
 	  FINISH_BTN_X(450), FINISH_BTN_Y(350),
 	  USR_EDIT_LENGTH(163), PSWD_EDIT_LENGTH(183),
+	  REM_PSWD_CB_X(130), REM_PSWD_CB_Y(180),
 	  LOGIN_BTN_X(165), LOGIN_BTN_Y(200),
 	  CONFIG_WND_CLSNAME("BaseGui"), CONFIG_WND_WIDTH(452),
 	  SYNC_PATH_EDIT_LENGTH(336),
-	  NEXT_BTN_X(410), NEXT_BTN_Y(320)
+	  NEXT_BTN_X(410), NEXT_BTN_Y(320),
+	  SHOW_FLOAT_WND_X(370), SHOW_FLOAT_WND_Y(280),
+	  CONFIG_OK_BTN_X(410), CONFIG_OK_BTN_Y(320),
+	  WIZARD_NAME("新手引导"), SKIP_BTN_X(330), SKIP_BTN_Y(320)
 {
 }
 
@@ -35,8 +43,25 @@ bool BaiduYun::install(VirtualDesktop *vDesktop, string path)
 {
 	TRACE("%s ===> BaiduYun is installing...\n", __FUNCTION__);
 	
-	if (vDesktop != NULL) {
-		this->vDesktop = vDesktop;
+	if (vDesktop == NULL) return false;
+
+	this->vDesktop = vDesktop;
+
+	for (int i = 0; i < RETRY_SEVERAL_TIMES; ++i) {
+		// hWnd 保存了安装程序弹出已安装消息的窗口句柄
+		hWnd = vDesktop->findWindow(EXIST_WIN_TITLE);
+		if (hWnd != NULL) {
+			Installer::imitateLeftClick(CN_BTN_X, CN_BTN_Y);
+			return false;
+		}
+		else {
+			Sleep(WAIT_TIME_SPAN);
+		}
+	}
+
+	hWnd = NULL;    // 确保为空
+
+	for (int i = 0; i < RETRY_MANY_TIMES; ++i) {
 		// hWnd 保存了安装程序主窗口的句柄
 		hWnd = vDesktop->findWindow(INSTALL_WIN_TITLE);
 		if (hWnd != NULL) {
@@ -44,22 +69,25 @@ bool BaiduYun::install(VirtualDesktop *vDesktop, string path)
 			changeSettings(path);
 			complete();
 			login("yang_lian_xiang@126.com", "abc123");
-			config(path + "\\local");
+			config(path + "\\Local");
 			walkWizard();
 			finish();
+			break;
+		}
+		else {
+			Sleep(WAIT_TIME_SPAN);
+			if ((i + 1) == RETRY_MANY_TIMES) return false;
 		}
 	}
-
-	login("yang_lian_xiang@126.com", "abc123");
-	config(path + "\\local");
-	
+		
+	//login("yang_lian_xiang@126.com", "abc123");
+			
 	return true;
 }
 
+
 void BaiduYun::selectMode()
 {
-	Sleep(300);
-
 	// 自定义安装按钮
 	Installer::imitateLeftClick(CINSTALL_BTN_X, CINSTALL_BTN_Y);
 }
@@ -67,26 +95,27 @@ void BaiduYun::selectMode()
 
 void BaiduYun::changeSettings(string path)
 {
-	Sleep(1000);
-	
 	// 更改安装路径
 	if (!(path.empty())) {
-		ProcedureData pd;
-		ZeroMemory(&pd, sizeof(ProcedureData));
-		pd.clsName = PATH_CTRL_CLSNAME;
-		vDesktop->findChildWindows(hWnd, pd);
-		HWND hInputWnd = pd.wInfos.at(0).hWnd;
-		if (hInputWnd != NULL) {
-			DWORD dwResult = 0;
-			// 在输入框里设置上了新内容，但是没有Update，安装目录仍然没有改变。
-			::SendMessageTimeout(hInputWnd, WM_SETTEXT, NULL, (LPARAM)path.c_str(), SMTO_ABORTIFHUNG, 100, &dwResult);
-			// 使用Spy++查看窗口消息流得出，WM_CHAR消息可以触发对路径数据的更新。
-			::SendMessage(hInputWnd, WM_CHAR, NULL, NULL);
-
-			CString content;
-			SendMessageTimeout(hInputWnd, WM_GETTEXT, 256, (LPARAM)content.GetBuffer(256), SMTO_ABORTIFHUNG, 100, &dwResult);
-			content.ReleaseBuffer();
-			TRACE("!!!After set path ===> %s\n", content);
+		for (int i = 0; i < RETRY_MANY_TIMES; ++i) {
+			ProcedureData pd;
+			ZeroMemory(&pd, sizeof(ProcedureData));
+			pd.clsName = PATH_CTRL_CLSNAME;
+			vDesktop->findChildWindows(hWnd, pd);
+			if (pd.wInfos.size() > 0) {
+				HWND hInputWnd = pd.wInfos.at(0).hWnd;
+				if (hInputWnd != NULL) {
+					DWORD dwResult = 0;
+					// 在输入框里设置上了新内容，但是没有Update，安装目录仍然没有改变。
+					::SendMessageTimeout(hInputWnd, WM_SETTEXT, NULL, (LPARAM)path.c_str(), SMTO_ABORTIFHUNG, 100, &dwResult);
+					// 使用Spy++查看窗口消息流得出，WM_CHAR消息可以触发对路径数据的更新。
+					::SendMessage(hInputWnd, WM_CHAR, NULL, NULL);
+				}
+				break;
+			}
+			else {
+				Sleep(100);
+			}
 		}
 	}
 
@@ -94,14 +123,17 @@ void BaiduYun::changeSettings(string path)
 	Installer::imitateLeftClick(INSTALL_BTN_X, INSTALL_BTN_Y);
 }
 
+
+// 安装部分的完成
 void BaiduYun::complete()
 {
-	Sleep(7000);
+	Sleep(12000);
 
 	// 完成按钮
 	Installer::imitateLeftClick(FINISH_BTN_X, FINISH_BTN_Y);
-
-	Installer::deleteShortcuts(APP_NAME);    // 移除程序在桌面和开始菜单创建的快捷方式
+	    
+	// 移除程序在桌面和开始菜单创建的快捷方式
+	Installer::deleteShortcuts(APP_NAME);
 }
 
 
@@ -131,13 +163,19 @@ void BaiduYun::login(string usr, string pswd)
 		}
 	}
 	
+	/*
+	 * 去除记住密码的check，会导致以后无法对密码框进行WM_SETTEXT
+	 */
+	// Uncheck the remember pswd checkbox.
+	//Installer::imitateLeftClick(REM_PSWD_CB_X, REM_PSWD_CB_Y);
+	
 	Installer::imitateLeftClick(LOGIN_BTN_X, LOGIN_BTN_Y);
 }
 
 
 void BaiduYun::config(string path)
 {
-	SHCreateDirectory(NULL, CA2W(path.c_str()));
+	SHCreateDirectoryEx(NULL, path.c_str(), NULL);
 	
 	Sleep(3000);
 	
@@ -146,6 +184,10 @@ void BaiduYun::config(string path)
 	configSyncDir(path);
 	
 	Installer::imitateLeftClick(NEXT_BTN_X, NEXT_BTN_Y);
+	confirmUseExistDir();
+
+	//Installer::imitateLeftClick(SHOW_FLOAT_WND_X, SHOW_FLOAT_WND_Y);
+	Installer::imitateLeftClick(CONFIG_OK_BTN_X, CONFIG_OK_BTN_Y);
 }
 
 
@@ -185,13 +227,37 @@ void BaiduYun::configSyncDir(string path)
 }
 
 
+void BaiduYun::confirmUseExistDir()
+{
+	Sleep(300);
+	
+	HWND hTmpWnd = hWnd;
+	hWnd = vDesktop->findWindow(APP_NAME);
+	if (hWnd != NULL) {
+		Installer::imitateLeftClick(OY_BTN_X, OY_BTN_Y);
+	}
+	hWnd = hTmpWnd;
+}
+
+
 void BaiduYun::walkWizard()
 {
+	Sleep(300);
+	
+	hWnd = vDesktop->findWindow(WIZARD_NAME);
+	if (hWnd != NULL) {
+		Installer::imitateLeftClick(SKIP_BTN_X, SKIP_BTN_Y);
+		HWND hTmpWnd = hWnd;
+		hWnd = vDesktop->findWindow(APP_NAME);
+		Installer::imitateLeftClick(OY_BTN_X, OY_BTN_Y);
+		hWnd = hTmpWnd;
+	}
 }
+
 
 void BaiduYun::finish()
 {
-	Sleep(1000);
+	Sleep(300);
 	
 	//Installer::killProcess(PROCESS_NAME);    // 结束安装完成后自动运行的进程
 }

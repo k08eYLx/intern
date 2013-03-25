@@ -8,64 +8,64 @@
   </SettingsComponent>
   <RecentFiles>
     <RecentFiles>
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SilentInstaller.rc" caret="2495" fromTop="13" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:stdafx.h" caret="1177" fromTop="7" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="439" fromTop="5" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.h" caret="71" fromTop="2" />
       <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SettingPage.h" caret="457" fromTop="12" />
       <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:ConfirmPage.h" caret="83" fromTop="4" />
       <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SilentInstaller.cpp" caret="0" fromTop="0" />
       <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.h" caret="530" fromTop="9" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SelectModePage.h" caret="409" fromTop="10" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SettingPage.cpp" caret="1681" fromTop="6" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SelectModePage.cpp" caret="1726" fromTop="14" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SilentInstallerDlg.cpp" caret="0" fromTop="0" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:Resource.h" caret="333" fromTop="7" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:Installer.h" caret="475" fromTop="23" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:Installer.cpp" caret="77" fromTop="2" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.h" caret="86" fromTop="5" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:ConfirmPage.cpp" caret="317" fromTop="14" />
       <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SilentInstallerDlg.h" caret="867" fromTop="35" />
       <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:InstallingPage.h" caret="87" fromTop="3" />
       <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:InstallingPage.cpp" caret="343" fromTop="14" />
       <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WizardPage.cpp" caret="376" fromTop="9" />
       <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WizardPage.h" caret="206" fromTop="10" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.h" caret="613" fromTop="0" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.cpp" caret="1050" fromTop="14" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="2556" fromTop="0" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1719" fromTop="7" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SilentInstallerDlg.cpp" caret="968" fromTop="10" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SilentInstaller.rc" caret="4521" fromTop="9" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:Resource.h" caret="468" fromTop="10" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SelectModePage.cpp" caret="1191" fromTop="9" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SelectModePage.h" caret="352" fromTop="17" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:SettingPage.cpp" caret="1822" fromTop="8" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:ConfirmPage.cpp" caret="1143" fromTop="9" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:Installer.h" caret="271" fromTop="5" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:Installer.cpp" caret="304" fromTop="13" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:stdafx.h" caret="1192" fromTop="12" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.h" caret="911" fromTop="11" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.h" caret="905" fromTop="7" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.h" caret="878" fromTop="9" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1296" fromTop="9" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="3953" fromTop="150" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="3663" fromTop="5" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.cpp" caret="3446" fromTop="1" />
     </RecentFiles>
     <RecentEdits>
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:InstallingPage.h" caret="439" fromTop="10" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:InstallingPage.h" caret="326" fromTop="8" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.cpp" caret="507" fromTop="6" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.cpp" caret="541" fromTop="10" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:InstallingPage.cpp" caret="1347" fromTop="14" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:InstallingPage.cpp" caret="1195" fromTop="9" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WizardPage.h" caret="265" fromTop="8" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WizardPage.cpp" caret="121" fromTop="4" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WizardPage.cpp" caret="406" fromTop="6" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WizardPage.cpp" caret="433" fromTop="4" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WizardPage.cpp" caret="547" fromTop="10" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:InstallingPage.h" caret="14" fromTop="1" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WizardPage.h" caret="334" fromTop="13" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:InstallingPage.h" caret="87" fromTop="3" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:InstallingPage.cpp" caret="131" fromTop="5" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:InstallingPage.cpp" caret="343" fromTop="14" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WizardPage.cpp" caret="353" fromTop="9" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WizardPage.h" caret="121" fromTop="6" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="1659" fromTop="5" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.h" caret="489" fromTop="3" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.h" caret="572" fromTop="8" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="2556" fromTop="3" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1706" fromTop="15" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1719" fromTop="9" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.cpp" caret="1008" fromTop="4" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1432" fromTop="3" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1802" fromTop="15" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1802" fromTop="10" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1778" fromTop="6" />
-      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1719" fromTop="7" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.cpp" caret="3331" fromTop="16" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.cpp" caret="3346" fromTop="10" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.cpp" caret="2633" fromTop="10" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.cpp" caret="983" fromTop="7" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.cpp" caret="1115" fromTop="14" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.h" caret="691" fromTop="7" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.cpp" caret="4229" fromTop="17" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.h" caret="958" fromTop="13" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.cpp" caret="630" fromTop="6" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="4286" fromTop="6" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="4004" fromTop="4" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.h" caret="878" fromTop="7" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="3048" fromTop="15" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.h" caret="770" fromTop="9" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="3129" fromTop="11" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="3136" fromTop="9" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="3167" fromTop="5" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="2181" fromTop="2" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="2289" fromTop="6" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="2392" fromTop="10" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="2642" fromTop="8" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:VirtualDesktop.cpp" caret="3036" fromTop="11" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WindowFinder.cpp" caret="839" fromTop="11" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="2229" fromTop="18" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="2229" fromTop="1" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.cpp" caret="4177" fromTop="10" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.cpp" caret="3780" fromTop="8" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.cpp" caret="3671" fromTop="12" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:WelcomePage.cpp" caret="1296" fromTop="3" />
+      <File id="59A2381B-C449-4E0A-B63F-91EF06D85D4C/f:BaiduYun.cpp" caret="3513" fromTop="7" />
     </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>
