@@ -1,5 +1,7 @@
 */.gitignore
 
+*.exe.stackdump
+
 */.idea/
 */data-dev/
 */etc/
