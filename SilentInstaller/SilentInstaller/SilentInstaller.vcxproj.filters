@@ -75,6 +75,9 @@
     <ClInclude Include="WizardPage.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="FileUtils.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SilentInstaller.cpp">
@@ -117,6 +120,9 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="WizardPage.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="FileUtils.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

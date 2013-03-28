@@ -9,6 +9,7 @@
 #include "WindowFinder.h"
 #include "SilentInstallerDlg.h"
 #include "BaiduYun.h"
+#include "FileUtils.h"
 
 // WelcomePage dialog
 
@@ -55,12 +56,12 @@ BOOL WelcomePage::OnSetActive()
 void WelcomePage::OnBnClickedListWindowsButton()
 {
 	// TODO: Add your control notification handler code here
-	
-	//*
+
+	/*
 	WindowFinder wndFinder;
 	wndFinder.listWindows(&edit);//*/
 
-	/*
+	//*
 	edit.SetWindowText("");
 	vDesktop->listWindows(&edit);//*/
 

@@ -14,13 +14,9 @@ public:
 
 // constants
 private:
-	const int WAIT_TIME_SPAN;           // Sleep的时长（ms）
-	const int RETRY_SEVERAL_TIMES;      // 查找窗口重试的次数
-	const int RETRY_MANY_TIMES;         // 查找窗口重试的次数
-
 	const string PROCESS_NAME;
-
 	const string APP_NAME;
+
 	const string EXIST_WIN_TITLE;       // 已安装时弹出的窗口写的是APP_NAME，但是实际不是
 	const string INSTALL_WIN_TITLE;
 	const string LOGIN_WIN_TITLE;

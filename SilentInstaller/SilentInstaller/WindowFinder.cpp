@@ -40,9 +40,14 @@ bool WindowFinder::appendText(CEdit *pEdit, HWND hwnd)
 
 		if (!title.IsEmpty()) {
 			title.Append("\n");
-			int nLength = pEdit->SendMessage(WM_GETTEXTLENGTH);
-			pEdit->SetSel(nLength, nLength);
-			pEdit->ReplaceSel(title);
+			if (pEdit != NULL) {
+				int nLength = pEdit->SendMessage(WM_GETTEXTLENGTH);
+				pEdit->SetSel(nLength, nLength);
+				pEdit->ReplaceSel(title);
+			}
+			else {
+				TRACE("%s", title);
+			}
 		}
 		return true;
 	}

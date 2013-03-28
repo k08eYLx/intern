@@ -104,6 +104,7 @@
   <ItemGroup>
     <ClInclude Include="BaiduYun.h" />
     <ClInclude Include="ConfirmPage.h" />
+    <ClInclude Include="FileUtils.h" />
     <ClInclude Include="FinishPage.h" />
     <ClInclude Include="Installer.h" />
     <ClInclude Include="WizardPage.h" />
@@ -122,6 +123,7 @@
   <ItemGroup>
     <ClCompile Include="BaiduYun.cpp" />
     <ClCompile Include="ConfirmPage.cpp" />
+    <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="FinishPage.cpp" />
     <ClCompile Include="Installer.cpp" />
     <ClCompile Include="WizardPage.cpp" />
