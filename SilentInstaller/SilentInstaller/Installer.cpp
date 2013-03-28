@@ -16,9 +16,9 @@ Installer::~Installer(void)
 
 void Installer::imitateLeftClick(int xPos, int yPos)
 {
-	assert(hWnd != NULL);
 	TRACE("%s ===> %d, %d\n", __FUNCTION__, xPos, yPos);
 	LONG pos = MAKELONG(xPos, yPos);
+	// Use PostMessage instead of SendMessage.
 	::PostMessage(hWnd, WM_LBUTTONDOWN, MK_LBUTTON, pos);
 	::PostMessage(hWnd, WM_LBUTTONUP, MK_LBUTTON, pos);
 }

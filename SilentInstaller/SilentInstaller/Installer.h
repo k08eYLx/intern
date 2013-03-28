@@ -27,5 +27,5 @@ protected:
 	LRESULT setText(HWND hInputWnd, string text);
 
 public:
-	void killProcess(string name);
+	static void killProcess(string name);
 };

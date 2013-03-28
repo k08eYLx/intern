@@ -5,7 +5,6 @@
 #include "SilentInstaller.h"
 #include "VirtualDesktop.h"
 
-
 // VirtualDesktop
 
 VirtualDesktop * VirtualDesktop::vDesktop = NULL;

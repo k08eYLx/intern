@@ -15,6 +15,7 @@ IMPLEMENT_DYNAMIC(SettingPage, CPropertyPage)
 SettingPage::SettingPage()
 	: WizardPage(SettingPage::IDD)
 	, m_strPath(_T(""))
+	, m_strWarning(_T(""))
 {
 
 }
@@ -27,6 +28,7 @@ void SettingPage::DoDataExchange(CDataExchange* pDX)
 {
 	CPropertyPage::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_PATH_EDIT, m_strPath);
+	DDX_Text(pDX, IDC_WARNING_STATIC, m_strWarning);
 }
 
 
@@ -78,8 +80,15 @@ LRESULT SettingPage::OnWizardNext()
 {
 	// TODO: Add your specialized code here and/or call the base class
 	UpdateData(TRUE);     // 使用控件上显示的内容更新变量里的内容
+	m_strPath.MakeUpper();
 	TRACE("\n===> %s <===\n", m_strPath);
 	
+	if (strncmp(m_strPath, "C:", strlen("C:")) == 0) {
+		m_strWarning = "不建议安装在C盘，请重新选择！";
+		UpdateData(FALSE);
+		return -1;
+	}
+
 	::SHCreateDirectoryEx(NULL, m_strPath, NULL);    // fully qualified path
 
 	pMainDialog->getConfirmPage().setInstallPath(m_strPath.GetBuffer());

@@ -65,3 +65,4 @@ LRESULT ConfirmPage::OnWizardNext()
 
 	return CPropertyPage::OnWizardNext();
 }
+

@@ -85,7 +85,8 @@ BOOL CSilentInstallerApp::InitInstance()
 	//m_pMainWnd = &dlg;
 	dlg.DoModal();
 
-	/*INT_PTR nResponse = dlg.DoModal();
+	/*
+	INT_PTR nResponse = dlg.DoModal();
 	// 无论DoModal返回什么，if-else都根本执行不到。WHY?
 	if (nResponse == IDOK)
 	{
@@ -96,7 +97,7 @@ BOOL CSilentInstallerApp::InitInstance()
 	{
 		// TODO: Place code here to handle when the dialog is
 		//  dismissed with Cancel
-	}*/
+	}//*/
 
 	// Since the dialog has been closed, return FALSE so that we exit the
 	//  application, rather than start the application's message pump.

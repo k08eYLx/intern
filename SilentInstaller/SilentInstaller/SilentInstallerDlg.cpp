@@ -18,7 +18,7 @@ SilentInstallerDlg::SilentInstallerDlg()
 	mPage.m_psp.dwFlags &= ~PSP_HASHELP;
 	sPage.m_psp.dwFlags &= ~PSP_HASHELP;
 	cPage.m_psp.dwFlags &= ~PSP_HASHELP;
-	iPage.m_psp.dwFlags &= ~PSP_HASHELP;
+//	iPage.m_psp.dwFlags &= ~PSP_HASHELP;
 	fPage.m_psp.dwFlags &= ~PSP_HASHELP;
 
 	/*
@@ -90,8 +90,6 @@ VirtualDesktop *SilentInstallerDlg::getVirtualDesktop()
 BEGIN_MESSAGE_MAP(SilentInstallerDlg, CPropertySheet)
 	ON_MESSAGE(WM_HOTKEY, OnHotKey)	   // 链接热键消息
 	ON_WM_DESTROY()
-	ON_COMMAND(ID_WIZFINISH, &SilentInstallerDlg::OnWizFinish)
-	ON_COMMAND(IDCANCEL, &SilentInstallerDlg::OnCancel)
 END_MESSAGE_MAP()
 
 
@@ -125,23 +123,5 @@ void SilentInstallerDlg::OnDestroy()
 
 	// 销毁虚拟桌面
 	vDesktop->destroy();
-}
-
-
-void SilentInstallerDlg::OnWizFinish()
-{
-	// TODO: Add your command handler code here
-
-	::SendMessage(m_hWnd, WM_DESTROY, 0, 0);
-	exit(EXIT_SUCCESS);
-}
-
-
-void SilentInstallerDlg::OnCancel()
-{
-	// TODO: Add your command handler code here
-
-	::SendMessage(m_hWnd, WM_DESTROY, 0, 0);
-	exit(EXIT_SUCCESS);
 }
 

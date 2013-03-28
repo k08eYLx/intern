@@ -48,3 +48,4 @@ LRESULT InstallingPage::OnWizardNext()
 
 	return CPropertyPage::OnWizardNext();
 }
+

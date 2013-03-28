@@ -56,6 +56,4 @@ public:
 	afx_msg LRESULT OnHotKey(WPARAM wParam, LPARAM lParam);		// 自定义热键消息函数
 	virtual BOOL OnInitDialog();
 	afx_msg void OnDestroy();
-	afx_msg void OnWizFinish();
-	afx_msg void OnCancel();
 };

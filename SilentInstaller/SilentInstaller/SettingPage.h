@@ -26,4 +26,5 @@ public:
 	virtual BOOL OnSetActive();
 	afx_msg void OnBnClickedBrowseButton();
 	virtual LRESULT OnWizardNext();
+	CString m_strWarning;
 };

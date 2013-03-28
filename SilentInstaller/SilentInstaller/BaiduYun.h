@@ -85,6 +85,7 @@ public:
 	virtual bool install(VirtualDesktop *vDesktop, string path);
 	
 private:
+	bool isInstalled();
 	void selectMode();
 	void changeSettings(string path);
 	void complete();            // 完成安装
@@ -95,6 +96,9 @@ private:
 	void confirmUseExistDir();  // 将已存在目录设为同步目录
 	void walkWizard();          // 此处直接跳过向导，也可以完全不用处理
 	void finish();              // 结束整个安装及设置等过程
+
+public:
+	void kill();
 
 protected:
 	DECLARE_MESSAGE_MAP()

@@ -8,8 +8,6 @@
 
 #include "WindowFinder.h"
 #include "SilentInstallerDlg.h"
-#include "BaiduYun.h"
-#include "FileUtils.h"
 
 // WelcomePage dialog
 
@@ -64,7 +62,7 @@ void WelcomePage::OnBnClickedListWindowsButton()
 	//*
 	edit.SetWindowText("");
 	vDesktop->listWindows(&edit);//*/
-
+	
 	/*
 	WindowFinder wndFinder;
 	HWND hWnd = vDesktop->findWindow("百度云 安装");

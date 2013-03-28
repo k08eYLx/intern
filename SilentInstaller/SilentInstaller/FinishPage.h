@@ -21,4 +21,5 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	virtual BOOL OnSetActive();
+	virtual BOOL OnWizardFinish();
 };

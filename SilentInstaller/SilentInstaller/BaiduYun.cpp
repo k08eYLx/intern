@@ -42,23 +42,12 @@ BaiduYun::~BaiduYun()
 
 bool BaiduYun::install(VirtualDesktop *vDesktop, string path)
 {
-	TRACE("%s ===> BaiduYun is installing...\n", __FUNCTION__);
-	
 	if (vDesktop == NULL) return false;
-
+	
+	TRACE("%s ===> BaiduYun is installing...\n", __FUNCTION__);
 	this->vDesktop = vDesktop;
 
-	for (int i = 0; i < RETRY_SEVERAL_TIMES; ++i) {
-		// hWnd 保存了安装程序弹出的已安装消息窗口句柄
-		hWnd = vDesktop->findWindow(EXIST_WIN_TITLE);
-		if (hWnd != NULL) {
-			Installer::imitateLeftClick(CN_BTN_X, CN_BTN_Y);
-			return false;
-		}
-		else {
-			Sleep(WAIT_TIME_SHORT);
-		}
-	}
+	if (isInstalled()) return false;
 
 	//*
 	for (int i = 0; i < RETRY_MANY_TIMES; ++i) {
@@ -66,21 +55,33 @@ bool BaiduYun::install(VirtualDesktop *vDesktop, string path)
 		hWnd = vDesktop->findWindow(INSTALL_WIN_TITLE);
 		if (hWnd != NULL) {
 			selectMode();
-			changeSettings(path);
+			changeSettings(path);  // 不能安装在C盘中，除了默认位置以外的路径
 			complete();
 			login("yang_lian_xiang@126.com", "abc123");
 			config(path + "\\Local");
 			walkWizard();
 			finish();
-			break;
+			return true;
 		}
-		else {
-			Sleep(WAIT_TIME_SHORT);
-			if ((i + 1) == RETRY_MANY_TIMES) return false;
-		}
+		else Sleep(WAIT_TIME_SHORT);
 	}//*/
 	
-	return true;
+	return false;
+}
+
+
+bool BaiduYun::isInstalled()
+{
+	for (int i = 0; i < RETRY_SEVERAL_TIMES; ++i) {
+		// hWnd 保存了安装程序弹出的已安装消息窗口句柄
+		hWnd = vDesktop->findWindow(EXIST_WIN_TITLE);
+		if (hWnd != NULL) {
+			Installer::imitateLeftClick(CN_BTN_X, CN_BTN_Y);
+			return true;
+		}
+		else Sleep(WAIT_TIME_SHORT);
+	}
+	return false;
 }
 
 
@@ -107,9 +108,7 @@ void BaiduYun::changeSettings(string path)
 				}
 				break;
 			}
-			else {
-				Sleep(WAIT_TIME_SHORT);
-			}
+			else Sleep(WAIT_TIME_SHORT);
 		}
 	}
 
@@ -124,55 +123,63 @@ void BaiduYun::complete()
 	DWORD timeToSleep = 0;
 	for (int i = 0; i < RETRY_MANY_TIMES; ++i) {
 		if (FileUtils::isDesktopShortcutExist(APP_NAME)) {
-			// 移除程序在桌面和开始菜单创建的快捷方式
-			FileUtils::deleteShortcuts(APP_NAME);
 			timeToSleep = WAIT_TIME_LONG * (i + 1);
 			break;
 		}
 		else Sleep(WAIT_TIME_LONG);
 	}
-	TRACE("===> %d\n", timeToSleep);
+	// 移除程序在桌面和开始菜单创建的快捷方式
+	FileUtils::deleteShortcuts(APP_NAME);
+	TRACE("Shortcuts ===> %d\n", timeToSleep);    // 在生成快捷方式前等待的时间
 	
-	Sleep(timeToSleep * 6);   // 此处的时长怎么控制？？？
-
-	// 完成按钮
-	Installer::imitateLeftClick(FINISH_BTN_X, FINISH_BTN_Y);
+	DWORD timeSleeped = 0;
+	HWND hLoginWnd = NULL;
+	for (int i = 0; i < RETRY_MANY_TIMES; ++i) {
+		hLoginWnd = vDesktop->findWindow(LOGIN_WIN_TITLE);
+		if (hLoginWnd != NULL) {
+			timeSleeped = WAIT_TIME_LONG * (i + 1);
+			break;
+		}
+		else {
+			Sleep(timeToSleep);
+			// 完成按钮
+			Installer::imitateLeftClick(FINISH_BTN_X, FINISH_BTN_Y);
+		}
+	}
+	TRACE("Login ===> %d\n", timeSleeped);
+	
+	// hWnd 改为保存登录窗口的句柄
+	hWnd = hLoginWnd;
 }
 
 
 void BaiduYun::login(string usr, string pswd)
 {
-	DWORD timeSleeped = 0;
-	for (int i = 0; i < RETRY_MANY_TIMES; ++i) {
-		// hWnd 改为保存登录窗口的句柄
-		hWnd = vDesktop->findWindow(LOGIN_WIN_TITLE);
-		if (hWnd != NULL) {
-			timeSleeped = WAIT_TIME_LONG * (i + 1);
+	for (int i = 0; i < RETRY_SEVERAL_TIMES; ++i) {
+		ProcedureData pd;
+		//ZeroMemory(&pd, sizeof(ProcedureData));  // 清零的操作将导致不能对容器进行遍历
+		vDesktop->findChildWindows(hWnd, pd);
+		vector<WndInfo> &wInfos = pd.wInfos;
+		if (wInfos.size() > 0) {		
+			vector<WndInfo>::iterator iter = wInfos.begin();
+			for ( ; iter != wInfos.end(); ++iter) {
+				HWND hInputWnd = iter->hWnd;
+				if (USR_EDIT_LENGTH == iter->length) {        // 填充用户名
+					Installer::setText(hInputWnd, usr);
+				}
+				else if (PSWD_EDIT_LENGTH == iter->length) {  // 填充用密码
+					Installer::setText(hInputWnd, pswd);
+				}
+			}
 			break;
 		}
-		else Sleep(WAIT_TIME_LONG);
-	}
-	TRACE("===> %d\n", timeSleeped);
-	
-	ProcedureData pd;
-	//ZeroMemory(&pd, sizeof(ProcedureData));  // 清零的操作将导致不能对容器进行遍历
-	vDesktop->findChildWindows(hWnd, pd);
-	vector<WndInfo> &wInfos = pd.wInfos;
-	vector<WndInfo>::iterator iter = wInfos.begin();
-	for ( ; iter != wInfos.end(); ++iter) {
-		HWND hInputWnd = iter->hWnd;
-		if (USR_EDIT_LENGTH == iter->length) {        // 填充用户名
-			Installer::setText(hInputWnd, usr);
-		}
-		else if (PSWD_EDIT_LENGTH == iter->length) {  // 填充用密码
-			Installer::setText(hInputWnd, pswd);
-		}
+		else Sleep(WAIT_TIME_SHORT);
 	}
 	
 	/*
-	 * 去除记住密码的check，会导致以后无法对密码框进行WM_SETTEXT
+	 * Uncheck the remember pswd checkbox.
+	 * 貌似去除记住密码的check会导致以后无法对密码框进行WM_SETTEXT
 	 */
-	// Uncheck the remember pswd checkbox.
 	//Installer::imitateLeftClick(REM_PSWD_CB_X, REM_PSWD_CB_Y);
 	
 	Installer::imitateLeftClick(LOGIN_BTN_X, LOGIN_BTN_Y);
@@ -196,7 +203,7 @@ void BaiduYun::config(string path)
 	
 	Sleep(WAIT_TIME_LONG);
 
-	/* 没效果???
+	/* 没效果，WHY???
 	Installer::imitateLeftClick(SHOW_FLOAT_WND_X, SHOW_FLOAT_WND_Y);//*/
 
 	Installer::imitateLeftClick(CONFIG_OK_BTN_X, CONFIG_OK_BTN_Y);
@@ -269,14 +276,33 @@ void BaiduYun::walkWizard()
 }
 
 
-void BaiduYun::finish()
+void BaiduYun::kill()
 {
 	Sleep(WAIT_TIME_LONG);
+	Installer::killProcess(PROCESS_NAME);
+}
 
-	// 1160, 95 鼠标右键
-	//::GetDesktopWindow();
 
-	Installer::killProcess(PROCESS_NAME);    // 结束安装完成后自动运行的进程
+void BaiduYun::finish()
+{
+	// Hide the floating window, just be effectable to this single time.
+	Sleep(WAIT_TIME_LONG);
+	hWnd = vDesktop->findWindow(APP_NAME);
+	if (hWnd != NULL) {
+		/*// Show menu
+		::PostMessage(hWnd, WM_RBUTTONDOWN, NULL, NULL);
+		::PostMessage(hWnd, WM_RBUTTONUP, NULL, NULL);//*/	
+		::ShowWindow(hWnd, SW_HIDE);
+	}
+
+	/*
+	 * 结束安装完成后自动运行的进程，
+	 * 但是在此处执行貌似会导致再次启动时，
+	 * 重新弹出设置向导。
+	 *
+	 * 所以改为在Finish Page的finish按钮内执行kill操作了。
+	 * kill();
+	 */
 }
 
 
