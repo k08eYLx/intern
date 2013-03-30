@@ -47,6 +47,8 @@ END_MESSAGE_MAP()
 BOOL SelectModePage::OnSetActive()
 {
 	// TODO: Add your specialized code here and/or call the base class
+	WizardPage::OnSetActive();
+
 	pMainDialog->SetWizardButtons(PSWIZB_BACK | PSWIZB_NEXT);
 
 	return CPropertyPage::OnSetActive();

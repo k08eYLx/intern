@@ -29,6 +29,20 @@ public:
 	static bool isExist(string fullName);
 	static bool isDesktopShortcutExist(string name);
 
+	/*
+	 * Copy file or directory.
+	 * from is fully qualified paths.
+	 * Each file name is terminated by a single NULL character. 
+	 * The last file name is terminated with a double NULL character ("\0\0") to indicate the end of the buffer.
+	 */
+	static bool copy(string from, string to);
+
+	/*
+	 * from path is relative to the current directory.
+	 * Do NOT support multiple file names.
+	 */
+	static bool copyRelatively(string from, string to);
+
 protected:
 	DECLARE_MESSAGE_MAP()
 };

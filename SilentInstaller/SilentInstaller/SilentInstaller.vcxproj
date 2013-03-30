@@ -84,6 +84,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -107,6 +108,7 @@
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="FinishPage.h" />
     <ClInclude Include="Installer.h" />
+    <ClInclude Include="RegistryUtils.h" />
     <ClInclude Include="WizardPage.h" />
     <ClInclude Include="InstallingPage.h" />
     <ClInclude Include="SelectModePage.h" />
@@ -126,6 +128,7 @@
     <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="FinishPage.cpp" />
     <ClCompile Include="Installer.cpp" />
+    <ClCompile Include="RegistryUtils.cpp" />
     <ClCompile Include="WizardPage.cpp" />
     <ClCompile Include="InstallingPage.cpp" />
     <ClCompile Include="SelectModePage.cpp" />

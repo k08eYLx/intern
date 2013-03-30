@@ -8,6 +8,7 @@
 
 #include "SilentInstallerDlg.h"
 #include "BaiduYun.h"
+#include "FileUtils.h"
 
 // ConfirmPage dialog
 
@@ -56,9 +57,17 @@ LRESULT ConfirmPage::OnWizardNext()
 	// TODO: Add your specialized code here and/or call the base class
 	//*
 	if (!isInstalled) {
+		// 拷贝程序文件
+		string from = ".";
+#ifdef DEBUG
+		from.append(".\\Debug");
+#endif
+		FileUtils::copyRelatively(from.append("\\programs\\*"), path);
+
+		// 静默状态下对快盘类程序进行安装
 		BaiduYun byInstaller;
 		if (!(byInstaller.install(vDesktop, path))) {
-			MessageBox("1、可能是虚拟桌面创建失败；\n2、如果已安装怎么处理？？？3、多次查找安装主窗口无果。");
+			MessageBox("1、可能是虚拟桌面创建失败；\n2、如果已安装怎么处理？？？\n3、多次查找安装主窗口无果。");
 		}
 		isInstalled = !(isInstalled);
 	}//*/

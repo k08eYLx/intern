@@ -8,6 +8,8 @@
 
 #include "WindowFinder.h"
 #include "SilentInstallerDlg.h"
+#include "FileUtils.h"
+#include "BaiduYun.h"
 
 // WelcomePage dialog
 
@@ -41,9 +43,7 @@ END_MESSAGE_MAP()
 BOOL WelcomePage::OnSetActive()
 {
 	// TODO: Add your specialized code here and/or call the base class
-
-	pMainDialog = (SilentInstallerDlg *)GetParent();
-	vDesktop = pMainDialog->getVirtualDesktop();
+	WizardPage::OnSetActive();
 
 	pMainDialog->SetWizardButtons(PSWIZB_NEXT);
 
@@ -55,11 +55,20 @@ void WelcomePage::OnBnClickedListWindowsButton()
 {
 	// TODO: Add your control notification handler code here
 
+	//SetFileAttributes("D:\\ktv\\BaiduYun", FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_HIDDEN);
+
+	/*
+	string from = ".";
+#ifdef DEBUG
+	from.append(".\\Debug");
+#endif
+	FileUtils::copyRelatively(from.append("\\programs\\*"), "D:\\ktv");//*/
+
 	/*
 	WindowFinder wndFinder;
 	wndFinder.listWindows(&edit);//*/
 
-	//*
+	/*
 	edit.SetWindowText("");
 	vDesktop->listWindows(&edit);//*/
 	

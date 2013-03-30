@@ -57,3 +57,13 @@ void Installer::killProcess(string name)
 		isRunning = ::Process32Next(hSnapshot, &pe32);
 	}
 }
+
+
+string Installer::retrieveInstalledDir(string keyName, string key)
+{
+	CString value;
+	RegistryUtils ru;
+	ru.readCuString(keyName, key.c_str(), value);
+	return string(value);
+}
+

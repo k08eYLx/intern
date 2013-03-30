@@ -15,11 +15,13 @@
 */doc/
 */logs/
 
-*/*.aps
+*/*.opensdf
 */*.sdf
 */*.suo
 */Debug/
+*/Release/
 */ipch/
 */*/Debug/
+*/*/Release/
 */*.ReSharper.user
 */_ReSharper.*/

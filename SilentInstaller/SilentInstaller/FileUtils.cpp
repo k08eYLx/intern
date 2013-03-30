@@ -154,6 +154,42 @@ bool FileUtils::isDesktopShortcutExist(string name)
 }
 
 
+bool FileUtils::copy(string from, string to)
+{
+	SHFILEOPSTRUCT sfos;
+	ZeroMemory(&sfos, sizeof(SHFILEOPSTRUCT));
+
+	sfos.hNameMappings = NULL;
+	sfos.lpszProgressTitle = NULL;
+	sfos.hwnd = HWND_DESKTOP;
+	sfos.fFlags = FOF_NOCONFIRMATION | FOF_SILENT;
+	sfos.wFunc = FO_COPY;
+	// Make "pFrom" to be double-null terminated.
+	from.append(2, '\0');
+	sfos.pFrom = from.c_str();  // This string must be double-null terminated.
+	sfos.pTo = to.c_str();
+	
+	return (SHFileOperation(&sfos) == 0);
+}
+
+
+bool FileUtils::copyRelatively(string from, string to)
+{
+	// Make the from path to fully qualified.
+	char buf[MAX_PATH] = { 0 };             // 存放路径的变量
+	::GetCurrentDirectory(MAX_PATH, buf);   // 获取程序的当前目录
+	
+	/*
+	// 与用GetCurrentDirectory获取的相对位置是不一样的
+	::GetModuleFileName(NULL, buf, MAX_PATH);
+	PathRemoveFileSpec(buf);*/
+
+	sprintf_s(buf, "%s\\%s", buf, from.c_str());
+	
+	return copy(buf, to);
+}
+
+
 BEGIN_MESSAGE_MAP(FileUtils, CWnd)
 END_MESSAGE_MAP()
 

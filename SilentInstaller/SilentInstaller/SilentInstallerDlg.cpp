@@ -14,7 +14,9 @@ SilentInstallerDlg::SilentInstallerDlg()
 {
 	// 去掉帮助按钮
 	m_psh.dwFlags &= ~PSH_HASHELP;          // 前缀是PSH_
+#ifdef DEBUG
 	wPage.m_psp.dwFlags &= ~PSP_HASHELP;    // 前缀是PSP_
+#endif
 	mPage.m_psp.dwFlags &= ~PSP_HASHELP;
 	sPage.m_psp.dwFlags &= ~PSP_HASHELP;
 	cPage.m_psp.dwFlags &= ~PSP_HASHELP;
@@ -26,7 +28,9 @@ SilentInstallerDlg::SilentInstallerDlg()
 	 * but does not actually create the window for the page. 
 	 * The framework postpones creation of the window for the page until the user selects that page.
 	 */
+#ifdef DEBUG
 	AddPage(&wPage);
+#endif
 	AddPage(&mPage);
 	AddPage(&sPage);
 	AddPage(&cPage);

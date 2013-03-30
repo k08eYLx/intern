@@ -36,3 +36,15 @@ END_MESSAGE_MAP()
 
 
 // InstallerPage message handlers
+
+
+BOOL WizardPage::OnSetActive()
+{
+	// TODO: Add your specialized code here and/or call the base class
+	if (pMainDialog == NULL || vDesktop == NULL) {
+		pMainDialog = (SilentInstallerDlg *)GetParent();
+		vDesktop = pMainDialog->getVirtualDesktop();
+	}
+
+	return CPropertyPage::OnSetActive();
+}

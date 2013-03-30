@@ -85,6 +85,12 @@ bool BaiduYun::isInstalled()
 }
 
 
+string BaiduYun::retrieveInstalledDir()
+{
+	return Installer::retrieveInstalledDir("Software\\Baidu\\BaiduYun", "InstallDir");
+}
+
+
 void BaiduYun::selectMode()
 {
 	// 自定义安装按钮

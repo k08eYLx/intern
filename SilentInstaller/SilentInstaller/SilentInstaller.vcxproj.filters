@@ -78,6 +78,9 @@
     <ClInclude Include="FileUtils.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="RegistryUtils.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SilentInstaller.cpp">
@@ -123,6 +126,9 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="FileUtils.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="RegistryUtils.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
