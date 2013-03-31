@@ -57,7 +57,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <UACExecutionLevel>AsInvoker</UACExecutionLevel>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -78,6 +78,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -109,6 +110,7 @@
     <ClInclude Include="FinishPage.h" />
     <ClInclude Include="Installer.h" />
     <ClInclude Include="RegistryUtils.h" />
+    <ClInclude Include="TaskbarTray.h" />
     <ClInclude Include="WizardPage.h" />
     <ClInclude Include="InstallingPage.h" />
     <ClInclude Include="SelectModePage.h" />
@@ -129,6 +131,7 @@
     <ClCompile Include="FinishPage.cpp" />
     <ClCompile Include="Installer.cpp" />
     <ClCompile Include="RegistryUtils.cpp" />
+    <ClCompile Include="TaskbarTray.cpp" />
     <ClCompile Include="WizardPage.cpp" />
     <ClCompile Include="InstallingPage.cpp" />
     <ClCompile Include="SelectModePage.cpp" />

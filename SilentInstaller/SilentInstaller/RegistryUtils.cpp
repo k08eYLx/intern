@@ -116,6 +116,24 @@ bool RegistryUtils::readCuDword(string keyName, CString key, DWORD &value)
 }
 
 
+bool RegistryUtils::deleteTree(HKEY hRoot, string keyName, string subKey)
+{
+	/*
+	HKEY hKey = NULL;
+	LONG ret = ::RegOpenKeyEx(hRoot, keyName, 0, KEY_ALL_ACCESS, &hKey);
+	if (ret != ERROR_SUCCESS) return false;
+	ret = ::RegDeleteTree(hKey, subKey);
+	if (ret != ERROR_SUCCESS) return false;
+	return (ERROR_SUCCESS == ::RegCloseKey(hKey));*/
+	CRegKey regKey;
+	LONG ret = regKey.Open(hRoot, keyName.c_str());
+	if (ret != ERROR_SUCCESS) return false;
+	ret = regKey.RecurseDeleteKey(subKey.c_str());
+	if (ret != ERROR_SUCCESS) return false;
+	return (ERROR_SUCCESS == regKey.Close());
+}
+
+
 BEGIN_MESSAGE_MAP(RegistryUtils, CWnd)
 END_MESSAGE_MAP()
 

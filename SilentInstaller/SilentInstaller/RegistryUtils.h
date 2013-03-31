@@ -29,6 +29,8 @@ public:
 	bool readCuBoolean(string keyName, CString key, bool &value);
 	bool readCuDword(string keyName, CString key, DWORD &value);
 
+	bool deleteTree(HKEY hRoot, string keyName, string subKey);
+
 protected:
 	DECLARE_MESSAGE_MAP()
 };

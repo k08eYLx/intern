@@ -6,10 +6,13 @@
 #include "WelcomePage.h"
 #include "afxdialogex.h"
 
+#include <strsafe.h>
+
 #include "WindowFinder.h"
 #include "SilentInstallerDlg.h"
 #include "FileUtils.h"
 #include "BaiduYun.h"
+#include "TaskbarTray.h"
 
 // WelcomePage dialog
 
@@ -58,15 +61,28 @@ void WelcomePage::OnBnClickedListWindowsButton()
 	//SetFileAttributes("D:\\ktv\\BaiduYun", FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_HIDDEN);
 
 	/*
+	RegistryUtils ru;
+	if (!(ru.deleteTree(HKEY_CURRENT_USER, "Software\\Baidu", "BaiduHi"))) {
+		MessageBox("Failed");
+	}//*/
+
+	LONG ret = 0;
+	HKEY hKey = NULL;
+
+	ret = ::RegOpenKeyEx(HKEY_LOCAL_MACHINE
+		, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MyComputer\\NameSpace"
+		, 0, KEY_ALL_ACCESS, &hKey);
+	ret = ::RegDeleteTree(hKey, "{20D04FE0-3AEA-1069-A2D8-08002B303091}");
+	ret = ::RegCloseKey(hKey);
+
+	TRACE("===> %d\n", ret);
+
+	/*
 	string from = ".";
 #ifdef DEBUG
 	from.append(".\\Debug");
 #endif
 	FileUtils::copyRelatively(from.append("\\programs\\*"), "D:\\ktv");//*/
-
-	/*
-	WindowFinder wndFinder;
-	wndFinder.listWindows(&edit);//*/
 
 	/*
 	edit.SetWindowText("");
@@ -86,25 +102,6 @@ void WelcomePage::OnBnClickedListWindowsButton()
 		// 可以直接枚举到Edit控件
 		wndFinder.listChildWindows(hWnd, &edit);
 	}//*/
-
-	/*
-	HWND hInputWnd = NULL;
-	Sleep(300);
-	POINT pt;
-	pt.x = 650;
-	pt.y = 340;
-	hInputWnd = vDesktop->fromPoint(pt);
-	if (hInputWnd != NULL) {
-		DWORD dwResult = 0;
-		::SendMessageTimeout(hInputWnd, WM_SETTEXT, NULL, (LPARAM)"D:\\BaiduYun\\", SMTO_ABORTIFHUNG, 100, &dwResult);
-		::SendMessage(hInputWnd, WM_CHAR, NULL, NULL);
-
-		CString title;
-		SendMessageTimeout(hInputWnd, WM_GETTEXT, 256, (LPARAM)title.GetBuffer(256), SMTO_ABORTIFHUNG, 100, &dwResult);
-		title.ReleaseBuffer();
-		edit.SetWindowText(title);
-	}
-	//*/
 }
 
 
