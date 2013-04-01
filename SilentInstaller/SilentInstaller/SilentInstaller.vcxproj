@@ -109,6 +109,7 @@
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="FinishPage.h" />
     <ClInclude Include="Installer.h" />
+    <ClInclude Include="ProcessUtils.h" />
     <ClInclude Include="RegistryUtils.h" />
     <ClInclude Include="TaskbarTray.h" />
     <ClInclude Include="WizardPage.h" />
@@ -130,6 +131,7 @@
     <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="FinishPage.cpp" />
     <ClCompile Include="Installer.cpp" />
+    <ClCompile Include="ProcessUtils.cpp" />
     <ClCompile Include="RegistryUtils.cpp" />
     <ClCompile Include="TaskbarTray.cpp" />
     <ClCompile Include="WizardPage.cpp" />

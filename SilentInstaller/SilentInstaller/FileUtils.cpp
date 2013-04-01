@@ -169,7 +169,7 @@ bool FileUtils::copy(string from, string to)
 	sfos.pFrom = from.c_str();  // This string must be double-null terminated.
 	sfos.pTo = to.c_str();
 	
-	return (SHFileOperation(&sfos) == 0);
+	return (::SHFileOperation(&sfos) == 0);
 }
 
 
@@ -182,11 +182,48 @@ bool FileUtils::copyRelatively(string from, string to)
 	/*
 	// 与用GetCurrentDirectory获取的相对位置是不一样的
 	::GetModuleFileName(NULL, buf, MAX_PATH);
-	PathRemoveFileSpec(buf);*/
+	::PathRemoveFileSpec(buf);*/
 
 	sprintf_s(buf, "%s\\%s", buf, from.c_str());
 	
 	return copy(buf, to);
+}
+
+
+bool FileUtils::hide(string name)
+{
+	DWORD dwFileAttributes = FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_HIDDEN;
+	return (TRUE == ::SetFileAttributes(name.c_str(), dwFileAttributes));
+}
+
+
+void FileUtils::batSelfDelete()
+{
+	char fileName[MAX_PATH] = { 0 };
+	char name[MAX_PATH] = { 0 };
+	char batName[MAX_PATH] = { 0 };
+
+    char *ptr = NULL;
+    char r = '"', k = '%';
+    
+	::GetModuleFileName(NULL, fileName, MAX_PATH);
+    
+    ptr = strrchr(fileName, '\\');
+    if(ptr != NULL) strcpy_s(name, ptr+1);    
+	
+    FILE *pTmp = NULL;
+	sprintf_s(batName, "%s.bat", fileName);
+    if (fopen_s(&pTmp, batName, "w") != 0) return;
+	
+    fprintf(pTmp, ":1\n");
+    fprintf(pTmp, "taskkill /F /IM %s\n", name);
+    fprintf(pTmp, "del %c%s%c\n", r, fileName, r);
+    fprintf(pTmp, "if exist %c%s%c goto 1\n", r, fileName, r);
+    fprintf(pTmp, "del %c0\n", k);
+    
+    fclose(pTmp);
+    
+    WinExec(batName, SW_HIDE);
 }
 
 

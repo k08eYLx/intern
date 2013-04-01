@@ -285,7 +285,7 @@ void BaiduYun::walkWizard()
 void BaiduYun::kill()
 {
 	Sleep(WAIT_TIME_LONG);
-	Installer::killProcess(PROCESS_NAME);
+	ProcessUtils::kill(PROCESS_NAME);
 }
 
 

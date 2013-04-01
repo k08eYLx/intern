@@ -4,7 +4,6 @@
 #include "stdafx.h"
 #include "SilentInstaller.h"
 #include "ConfirmPage.h"
-#include "afxdialogex.h"
 
 #include "SilentInstallerDlg.h"
 #include "BaiduYun.h"

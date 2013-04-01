@@ -4,15 +4,16 @@
 #include "stdafx.h"
 #include "SilentInstaller.h"
 #include "WelcomePage.h"
-#include "afxdialogex.h"
 
-#include <strsafe.h>
+#include "SilentInstallerDlg.h"
+
+#include <Aclapi.h>
 
 #include "WindowFinder.h"
-#include "SilentInstallerDlg.h"
 #include "FileUtils.h"
 #include "BaiduYun.h"
 #include "TaskbarTray.h"
+#include "ProcessUtils.h"
 
 // WelcomePage dialog
 
@@ -56,9 +57,12 @@ BOOL WelcomePage::OnSetActive()
 
 void WelcomePage::OnBnClickedListWindowsButton()
 {
-	// TODO: Add your control notification handler code here
-
-	//SetFileAttributes("D:\\ktv\\BaiduYun", FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_HIDDEN);
+	// TODO: Add your control notification handler code here   
+	
+	/*
+	WindowFinder wndFinder;
+	HWND hWnd = wndFinder.find("Registry Editor");
+	wndFinder.listChildWindows(hWnd, &edit);*/
 
 	/*
 	RegistryUtils ru;
@@ -68,7 +72,7 @@ void WelcomePage::OnBnClickedListWindowsButton()
 
 	LONG ret = 0;
 	HKEY hKey = NULL;
-
+	
 	ret = ::RegOpenKeyEx(HKEY_LOCAL_MACHINE
 		, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MyComputer\\NameSpace"
 		, 0, KEY_ALL_ACCESS, &hKey);

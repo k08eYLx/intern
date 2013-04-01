@@ -2,6 +2,7 @@
 
 #include "VirtualDesktop.h"
 #include "RegistryUtils.h"
+#include "ProcessUtils.h"
 
 // abstract as base class
 class Installer
@@ -27,7 +28,4 @@ protected:
 	void imitateLeftClick(int xPos, int yPos);
 	LRESULT setText(HWND hInputWnd, string text);
 	string retrieveInstalledDir(string keyName, string key);
-
-public:
-	static void killProcess(string name);
 };

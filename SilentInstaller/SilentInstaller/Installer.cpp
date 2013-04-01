@@ -36,29 +36,6 @@ LRESULT Installer::setText(HWND hInputWnd, string text)
 }
 
 
-void Installer::killProcess(string name)
-{
-	PROCESSENTRY32 pe32;
-	pe32.dwSize = sizeof(pe32);
-	
-	HANDLE hSnapshot = ::CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-	if (hSnapshot == INVALID_HANDLE_VALUE) return;
-	
-	BOOL isRunning = Process32First(hSnapshot, &pe32);
-	while (isRunning) {
-		if (pe32.szExeFile == name) {
-			DWORD pid = pe32.th32ProcessID;
-			HANDLE hProcess = ::OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
-			if (hProcess != NULL) {
-				::TerminateProcess(hProcess, 0);
-				::CloseHandle(hProcess);
-			}
-		}
-		isRunning = ::Process32Next(hSnapshot, &pe32);
-	}
-}
-
-
 string Installer::retrieveInstalledDir(string keyName, string key)
 {
 	CString value;

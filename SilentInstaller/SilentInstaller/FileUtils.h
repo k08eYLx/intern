@@ -43,6 +43,11 @@ public:
 	 */
 	static bool copyRelatively(string from, string to);
 
+	// name can be either file or dir.
+	static bool hide(string name);
+
+	static void batSelfDelete();
+
 protected:
 	DECLARE_MESSAGE_MAP()
 };
