@@ -5,14 +5,14 @@
 #include "ProcessUtils.h"
 
 // abstract as base class
-class Installer
+class Uninstaller
 {
 public:
-	Installer(void);
-	virtual ~Installer(void);
+	Uninstaller(void);
+	virtual ~Uninstaller(void);
 
 public:
-	virtual bool install(VirtualDesktop *vDesktop, string path) = 0;
+	virtual bool uninstall(VirtualDesktop *vDesktop) = 0;
 	
 protected:
 	const int WAIT_TIME_SHORT;          // Sleep的时长（ms）较短

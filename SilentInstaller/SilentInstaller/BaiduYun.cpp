@@ -85,9 +85,9 @@ bool BaiduYun::isInstalled()
 }
 
 
-string BaiduYun::retrieveInstalledDir()
+string BaiduYun::retrieveInstallDir()
 {
-	return Installer::retrieveInstalledDir("Software\\Baidu\\BaiduYun", "InstallDir");
+	return Installer::retrieveInstallDir("Software\\Baidu\\BaiduYun", "InstallDir");
 }
 
 
@@ -285,7 +285,7 @@ void BaiduYun::walkWizard()
 void BaiduYun::kill()
 {
 	Sleep(WAIT_TIME_LONG);
-	Installer::killProcess(PROCESS_NAME);
+	ProcessUtils::kill(PROCESS_NAME);
 }
 
 

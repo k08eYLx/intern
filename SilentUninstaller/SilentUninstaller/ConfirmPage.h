@@ -9,18 +9,11 @@ class ConfirmPage : public WizardPage
 	DECLARE_DYNAMIC(ConfirmPage)
 
 public:
-	ConfirmPage(CWnd* pParent = NULL);   // standard constructor
+	ConfirmPage();   // standard constructor
 	virtual ~ConfirmPage();
 
 // Dialog Data
 	enum { IDD = IDD_CONFIRMPAGE_DIALOG };
-
-private:
-	bool isInstalled;
-	string path;
-
-public:
-	void setInstallPath(string path);
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support

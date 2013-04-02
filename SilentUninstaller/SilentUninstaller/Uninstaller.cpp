@@ -1,7 +1,7 @@
 #include "StdAfx.h"
-#include "Installer.h"
+#include "Uninstaller.h"
 
-Installer::Installer(void)
+Uninstaller::Uninstaller(void)
 	: vDesktop(NULL), hWnd(NULL),
 	  WAIT_TIME_SHORT(100), WAIT_TIME_LONG(720),
 	  RETRY_SEVERAL_TIMES(3), RETRY_MANY_TIMES(12)
@@ -9,12 +9,12 @@ Installer::Installer(void)
 }
 
 
-Installer::~Installer(void)
+Uninstaller::~Uninstaller(void)
 {
 }
 
 
-void Installer::imitateLeftClick(int xPos, int yPos)
+void Uninstaller::imitateLeftClick(int xPos, int yPos)
 {
 	TRACE("%s ===> %d, %d\n", __FUNCTION__, xPos, yPos);
 	LONG pos = MAKELONG(xPos, yPos);
@@ -24,7 +24,7 @@ void Installer::imitateLeftClick(int xPos, int yPos)
 }
 
 
-LRESULT Installer::setText(HWND hInputWnd, string text)
+LRESULT Uninstaller::setText(HWND hInputWnd, string text)
 {
 	DWORD dwResult = 0;
 	// 在输入框里设置上了新内容，但是没有Update。
@@ -36,9 +36,9 @@ LRESULT Installer::setText(HWND hInputWnd, string text)
 }
 
 
-string Installer::retrieveInstallDir(string keyName, string key)
+string Uninstaller::retrieveInstallDir(string keyName, string key)
 {
-	CString value;
+	CString value = "";
 	RegistryUtils ru;
 	ru.readCuString(keyName, key.c_str(), value);
 	return string(value);

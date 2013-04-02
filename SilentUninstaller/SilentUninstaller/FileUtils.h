@@ -14,6 +14,8 @@ public:
 public:
 	// Recursively, delete non-empty dir is also supported.
 	static BOOL rmDir(string dirName);
+	// !!! Do NOT test this in your develop working directory.
+	static void emptyCurDir();
 
 	// C:\Users\XXX\Desktop
 	static string getDesktopPath();
