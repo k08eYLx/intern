@@ -47,9 +47,12 @@ END_MESSAGE_MAP()
 BOOL SelectModePage::OnSetActive()
 {
 	// TODO: Add your specialized code here and/or call the base class
+#ifndef DEBUG
 	WizardPage::OnSetActive();
-
+	pMainDialog->SetWizardButtons(PSWIZB_NEXT);
+#else
 	pMainDialog->SetWizardButtons(PSWIZB_BACK | PSWIZB_NEXT);
+#endif
 
 	return CPropertyPage::OnSetActive();
 }

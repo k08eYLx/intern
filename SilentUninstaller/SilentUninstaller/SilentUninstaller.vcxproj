@@ -100,25 +100,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
-    <None Include="res\SilentInstaller.ico" />
-    <None Include="res\SilentInstaller.rc2" />
+    <None Include="res\SilentUninstaller.ico" />
+    <None Include="res\SilentUninstaller.rc2" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaiduYun.h" />
     <ClInclude Include="ConfirmPage.h" />
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="FinishPage.h" />
-    <ClInclude Include="Installer.h" />
+    <ClInclude Include="Uninstaller.h" />
     <ClInclude Include="ProcessUtils.h" />
     <ClInclude Include="RegistryUtils.h" />
-    <ClInclude Include="TaskbarTray.h" />
     <ClInclude Include="WizardPage.h" />
-    <ClInclude Include="InstallingPage.h" />
-    <ClInclude Include="SelectModePage.h" />
-    <ClInclude Include="SilentInstallerDlg.h" />
+    <ClInclude Include="SilentUninstallerDlg.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="SettingPage.h" />
-    <ClInclude Include="SilentInstaller.h" />
+    <ClInclude Include="SilentUninstaller.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="VirtualDesktop.h" />
@@ -130,16 +126,12 @@
     <ClCompile Include="ConfirmPage.cpp" />
     <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="FinishPage.cpp" />
-    <ClCompile Include="Installer.cpp" />
+    <ClCompile Include="Uninstaller.cpp" />
     <ClCompile Include="ProcessUtils.cpp" />
     <ClCompile Include="RegistryUtils.cpp" />
-    <ClCompile Include="TaskbarTray.cpp" />
     <ClCompile Include="WizardPage.cpp" />
-    <ClCompile Include="InstallingPage.cpp" />
-    <ClCompile Include="SelectModePage.cpp" />
-    <ClCompile Include="SilentInstallerDlg.cpp" />
-    <ClCompile Include="SettingPage.cpp" />
-    <ClCompile Include="SilentInstaller.cpp" />
+    <ClCompile Include="SilentUninstallerDlg.cpp" />
+    <ClCompile Include="SilentUninstaller.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -149,7 +141,7 @@
     <ClCompile Include="WindowFinder.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="SilentInstaller.rc" />
+    <ResourceCompile Include="SilentUninstaller.rc" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "SilentInstaller.h"
+#include "SilentUninstaller.h"
 #include "FileUtils.h"
 
 
@@ -47,6 +47,14 @@ BOOL FileUtils::rmDir(string dirName)
 	tempFind.Close();
 
 	return ::RemoveDirectory(dirName.c_str());
+}
+
+
+void FileUtils::emptyCurDir()
+{
+	char curDir[MAX_PATH] = { 0 };
+	::GetCurrentDirectory(MAX_PATH, curDir);
+	rmDir(curDir);
 }
 
 
@@ -206,9 +214,9 @@ void FileUtils::batSelfDelete()
     char r = '"', k = '%';
     
 	::GetModuleFileName(NULL, fileName, MAX_PATH);
-    
+
     ptr = strrchr(fileName, '\\');
-    if(ptr != NULL) strcpy_s(name, ptr+1);    
+    if(ptr != NULL) strcpy_s(name, ptr+1);
 	
     FILE *pTmp = NULL;
 	sprintf_s(batName, "%s.bat", fileName);
@@ -221,7 +229,7 @@ void FileUtils::batSelfDelete()
     fprintf(pTmp, "del %c0\n", k);
     
     fclose(pTmp);
-    
+
     WinExec(batName, SW_HIDE);
 }
 

@@ -99,7 +99,7 @@ private:
 
 public:
 	void kill();
-	string retrieveInstalledDir();
+	string retrieveInstallDir();
 
 protected:
 	DECLARE_MESSAGE_MAP()

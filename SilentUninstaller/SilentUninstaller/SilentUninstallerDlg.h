@@ -1,10 +1,7 @@
 #pragma once
 
 #include "WelcomePage.h"
-#include "SelectModePage.h"
-#include "SettingPage.h"
 #include "ConfirmPage.h"
-#include "InstallingPage.h"
 #include "FinishPage.h"
 
 #include "VirtualDesktop.h"
@@ -14,15 +11,15 @@
 /**
  * In fact, this is a property sheet, not a dialog.
 **/
-class SilentInstallerDlg : public CPropertySheet
+class SilentUninstallerDlg : public CPropertySheet
 {
-	DECLARE_DYNAMIC(SilentInstallerDlg)
+	DECLARE_DYNAMIC(SilentUninstallerDlg)
 
 public:
-	SilentInstallerDlg();
-	SilentInstallerDlg(UINT nIDCaption, CWnd* pParentWnd = NULL, UINT iSelectPage = 0);
-	SilentInstallerDlg(LPCTSTR pszCaption, CWnd* pParentWnd = NULL, UINT iSelectPage = 0);
-	virtual ~SilentInstallerDlg();
+	SilentUninstallerDlg();
+	SilentUninstallerDlg(UINT nIDCaption, CWnd* pParentWnd = NULL, UINT iSelectPage = 0);
+	SilentUninstallerDlg(LPCTSTR pszCaption, CWnd* pParentWnd = NULL, UINT iSelectPage = 0);
+	virtual ~SilentUninstallerDlg();
 
 private:
 	VirtualDesktop *vDesktop;	
@@ -31,18 +28,12 @@ private:
 
 protected:
 	WelcomePage    wPage;
-	SelectModePage mPage;
-	SettingPage    sPage;
 	ConfirmPage    cPage;
-	InstallingPage iPage;
 	FinishPage     fPage;
 
 public:
 	inline WelcomePage&    getWelcomePage()    { return wPage; }
-	inline SelectModePage& getSelectModePage() { return mPage; }
-	inline SettingPage&    getSettingPage()    { return sPage; }
 	inline ConfirmPage&    getConfirmPage()    { return cPage; }
-	inline InstallingPage& getInstallingPage() { return iPage; }
 	inline FinishPage&     getFinishPage()     { return fPage; }
 
 

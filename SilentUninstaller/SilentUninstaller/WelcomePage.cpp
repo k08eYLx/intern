@@ -2,17 +2,14 @@
 //
 
 #include "stdafx.h"
-#include "SilentInstaller.h"
+#include "SilentUninstaller.h"
 #include "WelcomePage.h"
 
-#include "SilentInstallerDlg.h"
-
-#include <Aclapi.h>
+#include "SilentUninstallerDlg.h"
 
 #include "WindowFinder.h"
 #include "FileUtils.h"
 #include "BaiduYun.h"
-#include "TaskbarTray.h"
 #include "ProcessUtils.h"
 
 // WelcomePage dialog
@@ -59,10 +56,10 @@ void WelcomePage::OnBnClickedListWindowsButton()
 {
 	// TODO: Add your control notification handler code here   
 	
-	/*
+	//*
 	WindowFinder wndFinder;
-	HWND hWnd = wndFinder.find("Registry Editor");
-	wndFinder.listChildWindows(hWnd, &edit);*/
+	//wndFinder.listWindows(&edit);
+	vDesktop->listWindows(&edit);//*
 
 	/*
 	RegistryUtils ru;
@@ -117,7 +114,7 @@ void WelcomePage::OnBnClickedListChildWindowsButton()
 	WindowFinder wndFinder;
 	HWND hWnd = wndFinder.find("百度云 安装");   // 百度云 安装
 	wndFinder.listChildWindows(hWnd, &edit);
-	SilentInstallerDlg *pSiDlg = (SilentInstallerDlg *)GetParent();
+	SilentUninstallerDlg *pSiDlg = (SilentUninstallerDlg *)GetParent();
 	pSiDlg->getVirtualDesktop()->listWindows(&edit);
 	hWnd = pSiDlg->getVirtualDesktop()->findWindow("百度云 安装");
 	wndFinder.listChildWindows(hWnd, &edit);

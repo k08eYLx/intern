@@ -85,9 +85,9 @@ bool BaiduYun::isInstalled()
 }
 
 
-string BaiduYun::retrieveInstalledDir()
+string BaiduYun::retrieveInstallDir()
 {
-	return Installer::retrieveInstalledDir("Software\\Baidu\\BaiduYun", "InstallDir");
+	return Installer::retrieveInstallDir("Software\\Baidu\\BaiduYun", "InstallDir");
 }
 
 

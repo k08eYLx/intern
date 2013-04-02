@@ -2,10 +2,10 @@
 //
 
 #include "stdafx.h"
-#include "SilentInstaller.h"
+#include "SilentUninstaller.h"
 #include "ConfirmPage.h"
 
-#include "SilentInstallerDlg.h"
+#include "SilentUninstallerDlg.h"
 #include "BaiduYun.h"
 #include "FileUtils.h"
 
@@ -13,8 +13,8 @@
 
 IMPLEMENT_DYNAMIC(ConfirmPage, CPropertyPage)
 
-ConfirmPage::ConfirmPage(CWnd* pParent /*=NULL*/)
-	: WizardPage(ConfirmPage::IDD), path(""), isInstalled(false)
+ConfirmPage::ConfirmPage()
+	: WizardPage(ConfirmPage::IDD)
 {
 
 }
@@ -29,12 +29,6 @@ void ConfirmPage::DoDataExchange(CDataExchange* pDX)
 }
 
 
-void ConfirmPage::setInstallPath(string path)
-{
-	this->path = path;
-}
-
-
 BEGIN_MESSAGE_MAP(ConfirmPage, CPropertyPage)
 END_MESSAGE_MAP()
 
@@ -45,7 +39,12 @@ END_MESSAGE_MAP()
 BOOL ConfirmPage::OnSetActive()
 {
 	// TODO: Add your specialized code here and/or call the base class
+#ifndef DEBUG
+	WizardPage::OnSetActive();
+	pMainDialog->SetWizardButtons(PSWIZB_NEXT);
+#else
 	pMainDialog->SetWizardButtons(PSWIZB_BACK | PSWIZB_NEXT);
+#endif
 
 	return CPropertyPage::OnSetActive();
 }
@@ -55,20 +54,10 @@ LRESULT ConfirmPage::OnWizardNext()
 {
 	// TODO: Add your specialized code here and/or call the base class
 	//*
-	if (!isInstalled) {
-		// 拷贝程序文件
-		string from = ".";
-#ifdef DEBUG
-		from.append(".\\Debug");
-#endif
-		FileUtils::copyRelatively(from.append("\\programs\\*"), path);
-
-		// 静默状态下对快盘类程序进行安装
-		BaiduYun byInstaller;
-		if (!(byInstaller.install(vDesktop, path))) {
-			MessageBox("1、可能是虚拟桌面创建失败；\n2、如果已安装怎么处理？？？\n3、多次查找安装主窗口无果。");
-		}
-		isInstalled = !(isInstalled);
+	// 静默状态下对快盘类程序进行卸载
+	BaiduYun byu;
+	if (!(byu.uninstall(vDesktop))) {
+		MessageBox("可能是：\n1、虚拟桌面创建失败；\n2、多次查找卸载窗口无果。", "Failed");
 	}//*/
 
 	return CPropertyPage::OnWizardNext();
