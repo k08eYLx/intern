@@ -2,8 +2,12 @@ package app;
 
 public abstract class Constants {
 
-	public static final String MYSQL_SCRIPT    = "mysql.tables";
-	public static final String H2_SCRIPT       = "h2.tables";
+	/**
+	 * h2-1.3.171:
+	 *  Improved compatibility with MySQL: 
+	 *  	support for "ENGINE=InnoDB charset=UTF8" when creating a table.
+	 */
+	public static final String DB_SCRIPT       = "db.tables";
 	
 	public static final String MAIN_URL        = "http://music.baidu.com/artist/";
 	public static final String ADDITIONAL_URLS = "additional.urls";

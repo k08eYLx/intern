@@ -23,7 +23,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import nbeans.Record;
-import ui.CloseWindowListener;
 import ui.GuiPrintStream;
 import ui.MainMenu;
 import utils.StringUtils;
@@ -118,7 +117,7 @@ public class GuiMain extends JFrame {
 		super("DeltaCrawler through proxy");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		addWindowListener(new CloseWindowListener());
+		//addWindowListener(new CloseWindowListener());
 		setResizable(false);
 		
 		MainMenu.addTo(this);

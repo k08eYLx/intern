@@ -56,7 +56,7 @@ public abstract class ExportRecords implements Runnable {
 		boolean useMySQL = db.equalsIgnoreCase(MYSQL_DB);
 		ConnectionPool.config(useMySQL);
 
-		runScript(Constants.H2_SCRIPT);
+		runScript(Constants.DB_SCRIPT);
 	}
   
 	private static void runScript(String path) {

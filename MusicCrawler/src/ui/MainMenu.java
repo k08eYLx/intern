@@ -11,6 +11,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import nbeans.Record;
+
 import crawler.proxy.ProxyHelper;
 import export.m2h.ExportHelper;
 
@@ -103,8 +105,18 @@ public class MainMenu {
 	
 	public static void addTo(JFrame frame) {
 		initialProxyMenu();
-		initialCalMenu();
-		initialExportMenu();
+		
+		/**
+		 * 如果正在使用MySQL数据库，则加载“导出数据”菜单；
+		 * 如果正在使用          H2数据库，则加载“计算索引”菜单。
+		 */
+		if (Record.isUsingMySql()) {
+			initialExportMenu();	
+		}
+		else {
+			initialCalMenu();	
+		}
+		
 		frame.setJMenuBar(menuBar);
 	}
 	

@@ -17,7 +17,6 @@ public abstract class Record {
 	
 	protected static boolean useMySQL = false;
 	
-	private   static String script    = null;
 	protected static String insertSql = null;
 	
 	protected static final String SELECT_SQL = "SELECT %s FROM %s WHERE %s=%d";
@@ -75,15 +74,18 @@ public abstract class Record {
 		ConnectionPool.config(useMySQL);
 
 		if (useMySQL) {
-			script = Constants.MYSQL_SCRIPT;
 			// Insert on duplicate key update
 			insertSql = "INSERT INTO %s VALUES (%s) ON DUPLICATE KEY UPDATE %s";
 		}
 		else {
-			script = Constants.H2_SCRIPT;
 			insertSql = "MERGE INTO %s VALUES (%s)";    // MERGE
 		}
-		SqlUtils.runScript(script);
+		
+		SqlUtils.runScript(Constants.DB_SCRIPT);
+	}
+	
+	public static boolean isUsingMySql() {
+		return useMySQL;
 	}
 	
 	public abstract String toString();

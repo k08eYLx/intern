@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Main-Class: app.GuiMain
 Class-Path: .
  libs/commons-logging-1.1.1.jar
- libs/h2-1.3.170.jar
+ libs/h2-1.3.171.jar
  libs/httpclient-4.2.2.jar
  libs/httpcore-4.2.2.jar
  libs/ini4j-0.5.2.jar

@@ -95,6 +95,9 @@ public abstract class ProxySite {
 		catch (IOException ioe) {
 			System.out.println("Bad proxy ===> " + ioe.getMessage());
 		}
+		catch (IllegalArgumentException iae) {
+			System.out.println("Bad proxy ===> " + iae.getMessage());
+		}
 		
 		return false;
 	}
