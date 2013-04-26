@@ -100,6 +100,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
+    <None Include="res\BaiduYun.exe" />
     <None Include="res\SilentInstaller.ico" />
     <None Include="res\SilentInstaller.rc2" />
   </ItemGroup>
@@ -111,6 +112,7 @@
     <ClInclude Include="Installer.h" />
     <ClInclude Include="ProcessUtils.h" />
     <ClInclude Include="RegistryUtils.h" />
+    <ClInclude Include="ResourceUtils.h" />
     <ClInclude Include="TaskbarTray.h" />
     <ClInclude Include="WizardPage.h" />
     <ClInclude Include="InstallingPage.h" />
@@ -133,6 +135,7 @@
     <ClCompile Include="Installer.cpp" />
     <ClCompile Include="ProcessUtils.cpp" />
     <ClCompile Include="RegistryUtils.cpp" />
+    <ClCompile Include="ResourceUtils.cpp" />
     <ClCompile Include="TaskbarTray.cpp" />
     <ClCompile Include="WizardPage.cpp" />
     <ClCompile Include="InstallingPage.cpp" />

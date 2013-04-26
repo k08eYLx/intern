@@ -5,13 +5,16 @@
 #include "SilentInstaller.h"
 #include "VirtualDesktop.h"
 
+#include "ResourceUtils.h"
+
+
 // VirtualDesktop
 
 VirtualDesktop * VirtualDesktop::vDesktop = NULL;
 
 IMPLEMENT_DYNAMIC(VirtualDesktop, CWnd)
 
-VirtualDesktop::VirtualDesktop()
+VirtualDesktop::VirtualDesktop() : tmpExe("")
 {
 	isOriginalDesktopActive = TRUE;
 	isInitialDesktop = TRUE;
@@ -19,6 +22,7 @@ VirtualDesktop::VirtualDesktop()
 
 VirtualDesktop::~VirtualDesktop()
 {
+	::DeleteFile(tmpExe);    // 删除临时文件
 }
 
 
@@ -51,8 +55,9 @@ void VirtualDesktop::create()
 		/*::CreateProcess(NULL, "C:\\Windows\\explorer.exe", NULL, NULL, TRUE
 			, NORMAL_PRIORITY_CLASS, NULL, NULL, &startupInfo, &processInfo);*/
 
-		CString commandLine = "clouds\\BaiduYun.exe"; // "D:\\ktv\\BaiduYun\\baiduyun.exe"; 
-		::CreateProcess(NULL, (CT2A)commandLine, NULL, NULL, TRUE
+		// 释放出临时文件，并保存路径。
+		tmpExe = ResourceUtils::extract2Tmp(IDR_BY_EXE).c_str();
+		::CreateProcess(NULL, (CT2A)tmpExe, NULL, NULL, TRUE
 			, NORMAL_PRIORITY_CLASS, NULL, NULL, &startupInfo, &processInfo);
 
 		// 完成初始化，以后不会再次被调用，防止打开虚拟桌面出现资源管理器
@@ -72,10 +77,12 @@ BOOL VirtualDesktop::terminateProcess()
 	return ::CloseHandle(hProcess);
 }
 
+
 void VirtualDesktop::deleteDesktop()
 {
 	::CloseDesktop(hDesktop);
-	delete vDesktop;
+	
+	delete vDesktop;  // 执行析构函数
 	vDesktop = NULL;
 }
 

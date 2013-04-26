@@ -28,6 +28,7 @@
     <None Include="res\SilentInstaller.ico">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\BaiduYun.exe" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SilentInstaller.h">
@@ -90,6 +91,9 @@
     <ClInclude Include="RegistryUtils.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceUtils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SilentInstaller.cpp">
@@ -144,6 +148,9 @@
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="RegistryUtils.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceUtils.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>

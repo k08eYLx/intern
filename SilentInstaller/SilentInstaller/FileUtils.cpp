@@ -226,6 +226,33 @@ void FileUtils::batSelfDelete()
 }
 
 
+/// <summary>Returns the path to the system's temporary directory</summary>
+/// <returns>The full path to the system's temporary directory</returns>
+tstring FileUtils::getTempPath()
+{
+    DWORD result = ::GetTempPath(0, _T(""));
+    if (result == 0)
+        throw std::runtime_error("Could not get system temp path");
+
+    // Allocate temporary buffer. The retured length includes the terminating _T('\0').
+    // std::vector is guaranteed to be sequential, thus can serve as a buffer that can be written to. 
+    std::vector<TCHAR> tempPath(result);
+
+    // If the buffer is large enough, the return value does _not_ include the terminating _T('\0')
+    result = ::GetTempPath(static_cast<DWORD>(tempPath.size()), &tempPath[0]);
+    if ((result == 0) || (result > tempPath.size()))
+        throw std::runtime_error("Could not get system temp path");
+
+    return tstring(tempPath.begin(), tempPath.begin() + static_cast<std::size_t>(result));
+}
+
+tstring FileUtils::getTempFileName(char *buffer, const char *prefix/* = _T("_si")*/)
+{
+	GetTempFileName(getTempPath().c_str(), prefix, 0, buffer);
+	return tstring(buffer, buffer + strlen(buffer));
+}
+
+
 BEGIN_MESSAGE_MAP(FileUtils, CWnd)
 END_MESSAGE_MAP()
 

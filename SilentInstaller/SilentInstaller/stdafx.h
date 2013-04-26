@@ -42,6 +42,7 @@
 
 #include <string>
 #include <vector>
+#include <afx.h>
 using namespace std;
 
 

@@ -3,6 +3,12 @@
 
 // FileUtils
 
+#ifdef _UNICODE
+#define tstring std::wstring
+#else
+#define tstring std::string
+#endif
+
 class FileUtils : public CWnd
 {
 	DECLARE_DYNAMIC(FileUtils)
@@ -47,9 +53,10 @@ public:
 	static bool hide(string name);
 
 	static void batSelfDelete();
+	
+	static tstring getTempPath();
+	static tstring getTempFileName(TCHAR *buffer, const TCHAR *prefix = _T("_si"));
 
 protected:
 	DECLARE_MESSAGE_MAP()
 };
-
-

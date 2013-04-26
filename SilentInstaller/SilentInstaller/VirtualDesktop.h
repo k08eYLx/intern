@@ -23,7 +23,8 @@ public:
 
 private:
 	static VirtualDesktop *vDesktop;    // the only VD
-	
+	CString tmpExe;
+
 	PROCESS_INFORMATION processInfo;
 	STARTUPINFO startupInfo;
 

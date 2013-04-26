@@ -15,13 +15,14 @@
 */doc/
 */logs/
 
-*/*.opensdf
-*/*.sdf
-*/*.suo
+*.opensdf
+*.sdf
+*.suo
 */Debug/
 */Release/
 */ipch/
 */*/Debug/
 */*/Release/
-*/*.ReSharper.user
-*/_ReSharper.*/
+*.ReSharper.user
+_ReSharper.*/
+*.exe
